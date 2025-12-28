@@ -1,0 +1,374 @@
+# Persian (فارسی) translation for WooCommerce Bulk Price & Discount Editor Pro
+# Copyright (C) 2025 WooCommerce Bulk Price & Discount Editor Pro
+# This file is distributed under the same license as the plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Bulk Price & Discount Editor Pro 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-price-discount-editor\n"
+"POT-Creation-Date: 2025-01-01 00:00:00+00:00\n"
+"PO-Revision-Date: 2025-01-01 00:00+0330\n"
+"Last-Translator: \n"
+"Language-Team: Persian\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: index.php:86
+msgid "WooCommerce is Required"
+msgstr "ووکامرس الزامی است"
+
+#: index.php:87
+msgid "WooCommerce Bulk Price & Discount Editor Pro requires WooCommerce to be installed and activated."
+msgstr "افزونه مدیریت قیمت و تخفیف نیازمند نصب و فعال‌سازی ووکامرس می‌باشد."
+
+#: admin/views/admin-page.php:16
+msgid "Bulk Price & Discount Manager (Pro)"
+msgstr "ابزار مدیریت قیمت و تخفیف (حرفه‌ای)"
+
+#: admin/views/admin-page.php:26
+msgid "Preview & Review Changes"
+msgstr "بررسی و پیش‌نمایش تغییرات"
+
+#: admin/views/partials/form-fields.php:15
+msgid "Operation Type"
+msgstr "نوع عملیات"
+
+#: admin/views/partials/form-fields.php:18
+msgid "Increase Regular Price"
+msgstr "افزایش قیمت اصلی (Regular Price)"
+
+#: admin/views/partials/form-fields.php:19
+msgid "Decrease Regular Price"
+msgstr "کاهش قیمت اصلی (Regular Price)"
+
+#: admin/views/partials/form-fields.php:20
+msgid "Apply/Update Sale Price"
+msgstr "اعمال/بروزرسانی قیمت حراج (Sale Price)"
+
+#: admin/views/partials/form-fields.php:21
+msgid "Remove All Discounts"
+msgstr "حذف کامل تخفیف‌ها"
+
+#: admin/views/partials/form-fields.php:26
+msgid "Change Amount"
+msgstr "مقدار تغییر"
+
+#: admin/views/partials/form-fields.php:30
+msgid "Percentage (%)"
+msgstr "درصد (%)"
+
+#: admin/views/partials/form-fields.php:31
+msgid "e.g. 10"
+msgstr "مثلاً 10"
+
+#: admin/views/partials/form-fields.php:34
+msgid "Fixed Amount"
+msgstr "عدد ثابت"
+
+#: admin/views/partials/form-fields.php:35
+msgid "e.g. 5000"
+msgstr "مثلاً 5000"
+
+#: admin/views/partials/form-fields.php:39
+msgid "Only one"
+msgstr "فقط یکی"
+
+#: admin/views/partials/form-fields.php:39
+msgid "of the two fields above should be filled. If both are filled, no changes will be applied."
+msgstr "از دو فیلد بالا را پر کنید. اگر هر دو پر شوند، هیچ تغییری اعمال نخواهد شد."
+
+#: admin/views/partials/form-fields.php:44
+msgid "Advanced Settings"
+msgstr "تنظیمات پیشرفته"
+
+#: admin/views/partials/form-fields.php:48
+msgid "Product Filter:"
+msgstr "فیلتر محصولات:"
+
+#: admin/views/partials/form-fields.php:48
+msgid "Process only products currently on sale"
+msgstr "فقط محصولات تخفیف‌دار فعلی را پردازش کن"
+
+#: admin/views/partials/form-fields.php:52
+msgid "Sync Sale Price:"
+msgstr "همگام‌سازی قیمت حراج:"
+
+#: admin/views/partials/form-fields.php:52
+msgid "When changing regular price, also change sale price proportionally"
+msgstr "در تغییر قیمت اصلی، قیمت حراج هم به همان نسبت تغییر کند"
+
+#: admin/views/partials/form-fields.php:54
+msgid "With this option enabled, the discount percentage stays constant and the sale price changes accordingly."
+msgstr "با فعال بودن این گزینه، درصد تخفیف ثابت باقی می‌ماند و قیمت حراج متناسب تغییر می‌کند."
+
+#: admin/views/partials/form-fields.php:55
+msgid "Example: If discount was 20%, it will remain 20% after the regular price change."
+msgstr "مثال: اگر تخفیف 20% بود، بعد از تغییر قیمت اصلی همچنان 20% باقی می‌ماند."
+
+#: admin/views/partials/form-fields.php:61
+msgid "Category"
+msgstr "دسته‌بندی"
+
+#: admin/views/partials/form-fields.php:67
+msgid "All Categories"
+msgstr "همه دسته‌ها"
+
+#: admin/views/partials/form-fields.php:76
+msgid "Sale Start Date"
+msgstr "تاریخ شروع حراج"
+
+#: admin/views/partials/form-fields.php:79
+msgid "For 'Apply Sale Price' operation, you can set a start date"
+msgstr "برای عملیات \"اعمال قیمت حراج\" می‌توانید تاریخ شروع تعیین کنید"
+
+#: admin/views/partials/form-fields.php:83
+msgid "Sale End Date"
+msgstr "تاریخ پایان حراج"
+
+#: admin/views/partials/form-fields.php:86
+msgid "For 'Apply Sale Price' operation, you can set an expiry date"
+msgstr "برای عملیات \"اعمال قیمت حراج\" می‌توانید تاریخ انقضا تعیین کنید"
+
+#: admin/views/partials/preview-table.php:18
+msgid "Image"
+msgstr "تصویر"
+
+#: admin/views/partials/preview-table.php:19
+msgid "Product Name"
+msgstr "نام محصول"
+
+#: admin/views/partials/preview-table.php:20
+msgid "Status"
+msgstr "وضعیت"
+
+#: admin/views/partials/preview-table.php:22
+msgid "Regular Price"
+msgstr "قیمت اصلی"
+
+#: admin/views/partials/preview-table.php:23
+msgid "(Before → After)"
+msgstr "(قبل ← بعد)"
+
+#: admin/views/partials/preview-table.php:26
+msgid "Sale Price"
+msgstr "قیمت حراج"
+
+#: admin/views/partials/preview-table.php:30
+msgid "Discount %"
+msgstr "درصد تخفیف"
+
+#: admin/views/partials/preview-table.php:33
+msgid "Start Date"
+msgstr "تاریخ شروع"
+
+#: admin/views/partials/preview-table.php:34
+msgid "End Date"
+msgstr "تاریخ پایان"
+
+#: admin/views/partials/preview-table.php:35
+msgid "Price Difference"
+msgstr "اختلاف قیمت"
+
+#: admin/views/partials/preview-table.php:36
+msgid "Final Price"
+msgstr "قیمت نهایی"
+
+#: admin/views/partials/preview-table.php:43
+msgid "On Sale"
+msgstr "تخفیف‌دار"
+
+#: admin/views/partials/preview-table.php:44
+msgid "Regular"
+msgstr "عادی"
+
+#: admin/views/partials/preview-table.php:56
+msgid "Removed"
+msgstr "حذف شد"
+
+#: admin/views/partials/preview-table.php:93
+msgid "Remove from list"
+msgstr "حذف از لیست"
+
+#: includes/models/handlers/class-date-handler.php:24
+#: includes/models/handlers/class-date-handler.php:50
+msgid "None"
+msgstr "ندارد"
+
+#: admin/class-admin-menu.php:30
+msgid "Bulk Price Editor"
+msgstr "ویرایش قیمت هوشمند"
+
+#: admin/class-admin-menu.php:42
+msgid "Translation Test"
+msgstr "تست ترجمه"
+
+#: admin/views/partials/preview-table.php:18
+msgid "Image"
+msgstr "تصویر"
+
+#: admin/views/partials/preview-table.php:19
+msgid "Product Name"
+msgstr "نام محصول"
+
+#: admin/views/partials/preview-table.php:20
+msgid "Status"
+msgstr "وضعیت"
+
+#: admin/views/partials/preview-table.php:22
+msgid "Regular Price"
+msgstr "قیمت اصلی"
+
+#: admin/views/partials/preview-table.php:23
+msgid "(Before → After)"
+msgstr "(قبل ← بعد)"
+
+#: admin/views/partials/preview-table.php:26
+msgid "Sale Price"
+msgstr "قیمت حراج"
+
+#: admin/views/partials/preview-table.php:30
+msgid "Discount %"
+msgstr "درصد تخفیف"
+
+#: admin/views/partials/preview-table.php:33
+msgid "Start Date"
+msgstr "تاریخ شروع"
+
+#: admin/views/partials/preview-table.php:34
+msgid "End Date"
+msgstr "تاریخ پایان"
+
+#: admin/views/partials/preview-table.php:35
+msgid "Price Difference"
+msgstr "اختلاف قیمت"
+
+#: admin/views/partials/preview-table.php:36
+msgid "Final Price"
+msgstr "قیمت نهایی"
+
+#: admin/views/partials/preview-table.php:43
+msgid "On Sale"
+msgstr "تخفیف‌دار"
+
+#: admin/views/partials/preview-table.php:44
+msgid "Regular"
+msgstr "عادی"
+
+#: admin/views/partials/preview-table.php:56
+msgid "Removed"
+msgstr "حذف شد"
+
+#: admin/views/partials/preview-table.php:93
+msgid "Remove from list"
+msgstr "حذف از لیست"
+
+#: admin/views/components/operation-header.php:30
+msgid "Preview Changes"
+msgstr "پیش‌نمایش تغییرات"
+
+#: admin/views/components/operation-header.php:34
+msgid "Operation:"
+msgstr "عملیات:"
+
+#: admin/views/components/operation-header.php:39
+msgid "Change Amount:"
+msgstr "مقدار تغییر:"
+
+#: admin/views/components/operation-header.php:44
+msgid "Total Products:"
+msgstr "تعداد محصولات:"
+
+#: admin/views/components/operation-header.php:48
+msgid "Sync:"
+msgstr "همگام‌سازی:"
+
+#: admin/views/components/operation-header.php:49
+msgid "Enabled"
+msgstr "فعال"
+
+#: admin/views/components/operation-header.php:49
+msgid "Disabled"
+msgstr "غیرفعال"
+
+#: admin/views/components/notice-box.php:18
+msgid "Warning: Irreversible Operation"
+msgstr "توجه: عملیات برگشت‌ناپذیر"
+
+#: admin/views/components/notice-box.php:23
+msgid "By clicking the button below, changes will be %1$spermanently%2$s applied to %3$s%4$d products%5$s."
+msgstr "با کلیک روی دکمه زیر، تغییرات به صورت %1$sدائمی%2$s روی %3$s%4$d محصول%5$s اعمال خواهد شد."
+
+#: includes/controllers/class-preview-controller.php:96
+msgid "No products found or invalid input"
+msgstr "محصولی یافت نشد یا ورودی نامعتبر است"
+
+#: includes/controllers/class-preview-controller.php:97
+msgid "Please check the following:"
+msgstr "لطفاً موارد زیر را بررسی کنید:"
+
+#: includes/controllers/class-preview-controller.php:99
+msgid "Only one of \"Percentage\" or \"Fixed Amount\" fields should be filled"
+msgstr "فقط یکی از فیلدهای \"درصد\" یا \"عدد ثابت\" پر شده باشد"
+
+#: includes/controllers/class-preview-controller.php:100
+msgid "Products exist with your selected filters"
+msgstr "محصولاتی با فیلترهای انتخابی شما وجود داشته باشند"
+
+#: includes/controllers/class-preview-controller.php:101
+msgid "Input value is greater than zero"
+msgstr "مقدار ورودی بزرگتر از صفر باشد"
+
+#: includes/controllers/class-preview-controller.php:120
+msgid "Confirm and Apply"
+msgstr "تایید و اجرای نهایی"
+
+#: includes/utilities/class-formatter.php:87
+msgid "None"
+msgstr "ندارد"
+
+#: includes/utilities/class-formatter.php:102
+msgid "Increase Regular Price"
+msgstr "افزایش قیمت اصلی"
+
+#: includes/utilities/class-formatter.php:103
+msgid "Decrease Regular Price"
+msgstr "کاهش قیمت اصلی"
+
+#: includes/utilities/class-formatter.php:104
+msgid "Apply/Update Sale Price"
+msgstr "اعمال قیمت حراج"
+
+#: includes/utilities/class-formatter.php:105
+msgid "Remove All Discounts"
+msgstr "حذف تخفیف"
+
+#: admin/class-admin-assets.php:52
+msgid "Loading preview page"
+msgstr "درحال دریافت پیش‌نمایش صفحه"
+
+#: admin/class-admin-assets.php:53
+msgid "Processing..."
+msgstr "در حال پردازش..."
+
+#: admin/class-admin-assets.php:54
+msgid "⏳ Applying batch"
+msgstr "⏳ درحال اعمال دسته"
+
+#: admin/class-admin-assets.php:55
+msgid "Are you sure you want to apply changes to all products?"
+msgstr "آیا از اعمال تغییرات روی تمام محصولات مطمئن هستید؟"
+
+#: admin/class-admin-assets.php:56
+msgid "✅ Changes successfully applied to all products. Please refresh the page."
+msgstr "✅ تغییرات با موفقیت روی تمام محصولات اعمال شد. صفحه را رفرش کنید."
+
+#: admin/class-admin-assets.php:58
+msgid "Error connecting to server"
+msgstr "خطا در برقراری ارتباط با سرور"
+
+#: admin/class-admin-assets.php:59
+msgid "Error applying changes"
+msgstr "خطا در اعمال تغییرات"

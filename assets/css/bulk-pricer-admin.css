@@ -1,0 +1,105 @@
+/**
+ * Bulk Price & Discount Editor Admin CSS
+ *
+ * @package Bulk_Price_Discount_Editor
+ */
+
+/* Pagination Styles */
+.sbp-pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sbp-page-link {
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #2271b1;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.sbp-page-link:hover {
+    background: #f0f6fc;
+    border-color: #2271b1;
+}
+
+.sbp-page-link.current {
+    background: #2271b1;
+    color: #fff;
+    border-color: #2271b1;
+    font-weight: bold;
+}
+
+/* Badge Styles */
+.badge-sale {
+    background: #e5ffef;
+    color: #2ecc71;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #2ecc71;
+}
+
+.badge-sync {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #1976d2;
+}
+
+/* Price Change Indicators */
+.price-changed {
+    background: #fffbf0;
+}
+
+.price-increase {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.price-decrease {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* Discount Badges */
+.discount-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.discount-before {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef5350;
+}
+
+.discount-after {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #66bb6a;
+}
+
+/* Table Styling */
+.wp-list-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.wp-list-table td {
+    vertical-align: middle;
+}
