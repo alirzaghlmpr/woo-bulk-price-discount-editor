@@ -77,7 +77,7 @@ A professional WordPress plugin for managing WooCommerce product prices and disc
 
 1. **Download the Plugin**
    ```bash
-   git clone https://github.com/yourusername/woocommerce-bulk-price-editor.git
+   git clone https://github.com/yourusername/woo-bulk-price-editor.git
    ```
 
 2. **Upload to WordPress**
@@ -503,6 +503,6 @@ If this plugin helped you, please:
 
 **Made with ❤️ for the WordPress & WooCommerce community**
 
-[⬆ Back to Top](#️-woocommerce-bulk-price--discount-editor-pro)
+[⬆ Back to Top](#️-woo-bulk-price--discount-editor-pro)
 
 </div>
