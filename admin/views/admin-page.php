@@ -10,10 +10,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$currency = get_woocommerce_currency_symbol();
+$bulk_pricer_currency = get_woocommerce_currency_symbol();
 ?>
 <div class="wrap">
-    <h1><?php echo esc_html__('Bulk Price & Discount Manager (Pro)', 'bulk-price-discount-editor'); ?></h1>
+    <h1><?php echo esc_html__('Bulk Price & Discount Manager (Pro)', 'bluk-price-discount-editor'); ?></h1>
 
     <div id="sbp-batch-status" style="display:none; margin-top: 20px;"></div>
 
@@ -23,7 +23,7 @@ $currency = get_woocommerce_currency_symbol();
 
             <p style="margin-top: 20px;">
                 <button type="button" id="sbp-preview-btn" class="button button-primary button-large" style="padding: 8px 30px;">
-                    🔍 <?php echo esc_html__('Preview & Review Changes', 'bulk-price-discount-editor'); ?>
+                    🔍 <?php echo esc_html__('Preview & Review Changes', 'bluk-price-discount-editor'); ?>
                 </button>
             </p>
         </form>

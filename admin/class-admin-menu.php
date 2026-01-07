@@ -27,8 +27,8 @@ class Bulk_Pricer_Admin_Menu
     public function register_menu()
     {
         add_menu_page(
-            __('Bulk Price Editor', 'bulk-price-discount-editor'),
-            __('Bulk Price Editor', 'bulk-price-discount-editor'),
+            __('Bulk Price Editor', 'bluk-price-discount-editor'),
+            __('Bulk Price Editor', 'bluk-price-discount-editor'),
             'manage_options',
             'theme-bulk-pricer',
             array($this, 'render_admin_page'),
@@ -39,8 +39,8 @@ class Bulk_Pricer_Admin_Menu
         // Add test submenu (can be removed later)
         add_submenu_page(
             'theme-bulk-pricer',
-            __('Translation Test', 'bulk-price-discount-editor'),
-            __('Translation Test', 'bulk-price-discount-editor'),
+            __('Translation Test', 'bluk-price-discount-editor'),
+            __('Translation Test', 'bluk-price-discount-editor'),
             'manage_options',
             'bulk-pricer-test',
             array($this, 'render_test_page')
@@ -56,7 +56,7 @@ class Bulk_Pricer_Admin_Menu
     {
         // Check user capabilities
         if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'bulk-price-discount-editor'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bluk-price-discount-editor'));
         }
 
         // Load the main admin page view
@@ -71,15 +71,15 @@ class Bulk_Pricer_Admin_Menu
     public function render_test_page()
     {
         if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'bulk-price-discount-editor'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bluk-price-discount-editor'));
         }
 
         global $l10n;
         $locale = get_locale();
-        $domain = 'bulk-price-discount-editor';
+        $domain = 'bluk-price-discount-editor';
         ?>
         <div class="wrap">
-            <h1><?php _e('Translation Test', 'bulk-price-discount-editor'); ?></h1>
+            <h1><?php esc_html_e('Translation Test', 'bluk-price-discount-editor'); ?></h1>
 
             <div class="card" style="max-width: 800px; margin-top: 20px;">
                 <h2>WordPress Language Settings</h2>
@@ -94,7 +94,7 @@ class Bulk_Pricer_Admin_Menu
                     </tr>
                     <tr>
                         <th>Expected MO File:</th>
-                        <td><code>bulk-price-discount-editor-<?php echo esc_html($locale); ?>.mo</code></td>
+                        <td><code>bluk-price-discount-editor-<?php echo esc_html($locale); ?>.mo</code></td>
                     </tr>
                 </table>
             </div>
@@ -103,7 +103,7 @@ class Bulk_Pricer_Admin_Menu
                 <h2>Translation Files Status</h2>
                 <?php
                 $languages_dir = BULK_PRICER_PLUGIN_DIR . 'languages/';
-                $mo_file = $languages_dir . "bulk-price-discount-editor-{$locale}.mo";
+                $mo_file = $languages_dir . "bluk-price-discount-editor-{$locale}.mo";
                 ?>
                 <table class="form-table">
                     <tr>
@@ -161,23 +161,23 @@ class Bulk_Pricer_Admin_Menu
                     </thead>
                     <tbody>
                         <?php
-                        $test_strings = array(
-                            'None',
-                            'Product Name',
-                            'Image',
-                            'Status',
-                            'Regular Price',
-                            'Sale Price',
-                            'Bulk Price Editor'
+                        // Test translations with literal strings
+                        $test_results = array(
+                            array('original' => 'None', 'translated' => __('None', 'bluk-price-discount-editor')),
+                            array('original' => 'Product Name', 'translated' => __('Product Name', 'bluk-price-discount-editor')),
+                            array('original' => 'Image', 'translated' => __('Image', 'bluk-price-discount-editor')),
+                            array('original' => 'Status', 'translated' => __('Status', 'bluk-price-discount-editor')),
+                            array('original' => 'Regular Price', 'translated' => __('Regular Price', 'bluk-price-discount-editor')),
+                            array('original' => 'Sale Price', 'translated' => __('Sale Price', 'bluk-price-discount-editor')),
+                            array('original' => 'Bulk Price Editor', 'translated' => __('Bulk Price Editor', 'bluk-price-discount-editor'))
                         );
 
-                        foreach ($test_strings as $string) {
-                            $translated = __($string, 'bulk-price-discount-editor');
-                            $is_translated = ($translated !== $string);
+                        foreach ($test_results as $test) {
+                            $is_translated = ($test['translated'] !== $test['original']);
                             ?>
                             <tr>
-                                <td><code><?php echo esc_html($string); ?></code></td>
-                                <td><strong><?php echo esc_html($translated); ?></strong></td>
+                                <td><code><?php echo esc_html($test['original']); ?></code></td>
+                                <td><strong><?php echo esc_html($test['translated']); ?></strong></td>
                                 <td>
                                     <?php if ($is_translated): ?>
                                         <span style="color: green;">✓ Translated</span>
@@ -215,7 +215,7 @@ class Bulk_Pricer_Admin_Menu
             <div class="notice notice-error" style="margin-top: 20px;">
                 <p><strong>Problem Detected!</strong></p>
                 <?php if (!file_exists($mo_file)): ?>
-                    <p>The translation file <code><?php echo basename($mo_file); ?></code> doesn't exist.</p>
+                    <p>The translation file <code><?php echo esc_html(basename($mo_file)); ?></code> doesn't exist.</p>
                     <p>Available locales: <code>fa_IR</code> (Persian), <code>en_US</code> (English)</p>
                 <?php endif; ?>
                 <?php if (!isset($l10n[$domain])): ?>

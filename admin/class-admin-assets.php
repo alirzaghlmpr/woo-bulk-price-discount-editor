@@ -49,14 +49,14 @@ class Bulk_Pricer_Admin_Assets
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('sbp_bulk_nonce'),
             'i18n' => array(
-                'loading_preview' => __('Loading preview page', 'bulk-price-discount-editor'),
-                'processing' => __('Processing...', 'bulk-price-discount-editor'),
-                'processing_batch' => __('⏳ Applying batch', 'bulk-price-discount-editor'),
-                'confirm_apply' => __('Are you sure you want to apply changes to all products?', 'bulk-price-discount-editor'),
-                'success' => __('✅ Changes successfully applied to all products. Please refresh the page.', 'bulk-price-discount-editor'),
-                'confirm_final' => __('✅ Confirm and Apply', 'bulk-price-discount-editor'),
-                'error_connection' => __('Error connecting to server', 'bulk-price-discount-editor'),
-                'error_applying' => __('Error applying changes', 'bulk-price-discount-editor')
+                'loading_preview' => __('Loading preview page', 'bluk-price-discount-editor'),
+                'processing' => __('Processing...', 'bluk-price-discount-editor'),
+                'processing_batch' => __('⏳ Applying batch', 'bluk-price-discount-editor'),
+                'confirm_apply' => __('Are you sure you want to apply changes to all products?', 'bluk-price-discount-editor'),
+                'success' => __('✅ Changes successfully applied to all products. Please refresh the page.', 'bluk-price-discount-editor'),
+                'confirm_final' => __('✅ Confirm and Apply', 'bluk-price-discount-editor'),
+                'error_connection' => __('Error connecting to server', 'bluk-price-discount-editor'),
+                'error_applying' => __('Error applying changes', 'bluk-price-discount-editor')
             )
         ));
 

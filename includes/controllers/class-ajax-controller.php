@@ -126,7 +126,7 @@ class Bulk_Pricer_Ajax_Controller
         // Get excluded product IDs
         $excluded_ids = array();
         if (isset($_POST['excluded_ids']) && !empty($_POST['excluded_ids'])) {
-            $excluded_ids = json_decode(stripslashes($_POST['excluded_ids']), true);
+            $excluded_ids = json_decode(sanitize_text_field(wp_unslash($_POST['excluded_ids'])), true);
             if (!is_array($excluded_ids)) {
                 $excluded_ids = array();
             }

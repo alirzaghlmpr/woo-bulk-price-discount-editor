@@ -1,0 +1,198 @@
+# English translation for WooCommerce Bulk Price & Discount Editor Pro
+# Copyright (C) 2025 WooCommerce Bulk Price & Discount Editor Pro
+# This file is distributed under the same license as the plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Bulk Price & Discount Editor Pro 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-price-discount-editor\n"
+"POT-Creation-Date: 2025-01-01 00:00:00+00:00\n"
+"PO-Revision-Date: 2025-01-01 00:00-0500\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: index.php:86
+msgid "WooCommerce is Required"
+msgstr "WooCommerce is Required"
+
+#: index.php:87
+msgid "WooCommerce Bulk Price & Discount Editor Pro requires WooCommerce to be installed and activated."
+msgstr "WooCommerce Bulk Price & Discount Editor Pro requires WooCommerce to be installed and activated."
+
+#: admin/views/admin-page.php:16
+msgid "Bulk Price & Discount Manager (Pro)"
+msgstr "Bulk Price & Discount Manager (Pro)"
+
+#: admin/views/admin-page.php:26
+msgid "Preview & Review Changes"
+msgstr "Preview & Review Changes"
+
+#: admin/views/partials/form-fields.php:15
+msgid "Operation Type"
+msgstr "Operation Type"
+
+#: admin/views/partials/form-fields.php:18
+msgid "Increase Regular Price"
+msgstr "Increase Regular Price"
+
+#: admin/views/partials/form-fields.php:19
+msgid "Decrease Regular Price"
+msgstr "Decrease Regular Price"
+
+#: admin/views/partials/form-fields.php:20
+msgid "Apply/Update Sale Price"
+msgstr "Apply/Update Sale Price"
+
+#: admin/views/partials/form-fields.php:21
+msgid "Remove All Discounts"
+msgstr "Remove All Discounts"
+
+#: admin/views/partials/form-fields.php:26
+msgid "Change Amount"
+msgstr "Change Amount"
+
+#: admin/views/partials/form-fields.php:30
+msgid "Percentage (%)"
+msgstr "Percentage (%)"
+
+#: admin/views/partials/form-fields.php:31
+msgid "e.g. 10"
+msgstr "e.g. 10"
+
+#: admin/views/partials/form-fields.php:34
+msgid "Fixed Amount"
+msgstr "Fixed Amount"
+
+#: admin/views/partials/form-fields.php:35
+msgid "e.g. 5000"
+msgstr "e.g. 5000"
+
+#: admin/views/partials/form-fields.php:39
+msgid "Only one"
+msgstr "Only one"
+
+#: admin/views/partials/form-fields.php:39
+msgid "of the two fields above should be filled. If both are filled, no changes will be applied."
+msgstr "of the two fields above should be filled. If both are filled, no changes will be applied."
+
+#: admin/views/partials/form-fields.php:44
+msgid "Advanced Settings"
+msgstr "Advanced Settings"
+
+#: admin/views/partials/form-fields.php:48
+msgid "Product Filter:"
+msgstr "Product Filter:"
+
+#: admin/views/partials/form-fields.php:48
+msgid "Process only products currently on sale"
+msgstr "Process only products currently on sale"
+
+#: admin/views/partials/form-fields.php:52
+msgid "Sync Sale Price:"
+msgstr "Sync Sale Price:"
+
+#: admin/views/partials/form-fields.php:52
+msgid "When changing regular price, also change sale price proportionally"
+msgstr "When changing regular price, also change sale price proportionally"
+
+#: admin/views/partials/form-fields.php:54
+msgid "With this option enabled, the discount percentage stays constant and the sale price changes accordingly."
+msgstr "With this option enabled, the discount percentage stays constant and the sale price changes accordingly."
+
+#: admin/views/partials/form-fields.php:55
+msgid "Example: If discount was 20%, it will remain 20% after the regular price change."
+msgstr "Example: If discount was 20%, it will remain 20% after the regular price change."
+
+#: admin/views/partials/form-fields.php:61
+msgid "Category"
+msgstr "Category"
+
+#: admin/views/partials/form-fields.php:67
+msgid "All Categories"
+msgstr "All Categories"
+
+#: admin/views/partials/form-fields.php:76
+msgid "Sale Start Date"
+msgstr "Sale Start Date"
+
+#: admin/views/partials/form-fields.php:79
+msgid "For 'Apply Sale Price' operation, you can set a start date"
+msgstr "For 'Apply Sale Price' operation, you can set a start date"
+
+#: admin/views/partials/form-fields.php:83
+msgid "Sale End Date"
+msgstr "Sale End Date"
+
+#: admin/views/partials/form-fields.php:86
+msgid "For 'Apply Sale Price' operation, you can set an expiry date"
+msgstr "For 'Apply Sale Price' operation, you can set an expiry date"
+
+#: admin/views/partials/preview-table.php:18
+msgid "Image"
+msgstr "Image"
+
+#: admin/views/partials/preview-table.php:19
+msgid "Product Name"
+msgstr "Product Name"
+
+#: admin/views/partials/preview-table.php:20
+msgid "Status"
+msgstr "Status"
+
+#: admin/views/partials/preview-table.php:22
+msgid "Regular Price"
+msgstr "Regular Price"
+
+#: admin/views/partials/preview-table.php:23
+msgid "(Before → After)"
+msgstr "(Before → After)"
+
+#: admin/views/partials/preview-table.php:26
+msgid "Sale Price"
+msgstr "Sale Price"
+
+#: admin/views/partials/preview-table.php:30
+msgid "Discount %"
+msgstr "Discount %"
+
+#: admin/views/partials/preview-table.php:33
+msgid "Start Date"
+msgstr "Start Date"
+
+#: admin/views/partials/preview-table.php:34
+msgid "End Date"
+msgstr "End Date"
+
+#: admin/views/partials/preview-table.php:35
+msgid "Price Difference"
+msgstr "Price Difference"
+
+#: admin/views/partials/preview-table.php:36
+msgid "Final Price"
+msgstr "Final Price"
+
+#: admin/views/partials/preview-table.php:43
+msgid "On Sale"
+msgstr "On Sale"
+
+#: admin/views/partials/preview-table.php:44
+msgid "Regular"
+msgstr "Regular"
+
+#: admin/views/partials/preview-table.php:56
+msgid "Removed"
+msgstr "Removed"
+
+#: admin/views/partials/preview-table.php:93
+msgid "Remove from list"
+msgstr "Remove from list"
+
+#: includes/models/handlers/class-date-handler.php:24
+#: includes/models/handlers/class-date-handler.php:50
+msgid "None"
+msgstr "None"

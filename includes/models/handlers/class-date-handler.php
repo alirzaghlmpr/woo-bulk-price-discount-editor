@@ -30,7 +30,7 @@ class Bulk_Pricer_Date_Handler
     public function get_sale_start_date($product, $is_on_sale)
     {
         if (!$is_on_sale) {
-            return __('None', 'bulk-price-discount-editor');
+            return __('None', 'bluk-price-discount-editor');
         }
 
         $start_date = $product->get_date_on_sale_from();
@@ -38,7 +38,7 @@ class Bulk_Pricer_Date_Handler
             return $start_date->date_i18n('Y/m/d');
         }
 
-        return __('None', 'bulk-price-discount-editor');
+        return __('None', 'bluk-price-discount-editor');
     }
 
     /**
@@ -52,7 +52,7 @@ class Bulk_Pricer_Date_Handler
     public function get_sale_end_date($product, $is_on_sale)
     {
         if (!$is_on_sale) {
-            return __('None', 'bulk-price-discount-editor');
+            return __('None', 'bluk-price-discount-editor');
         }
 
         $end_date = $product->get_date_on_sale_to();
@@ -60,7 +60,7 @@ class Bulk_Pricer_Date_Handler
             return $end_date->date_i18n('Y/m/d');
         }
 
-        return __('None', 'bulk-price-discount-editor');
+        return __('None', 'bluk-price-discount-editor');
     }
 
     /**

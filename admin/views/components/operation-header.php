@@ -11,42 +11,42 @@ if (!defined('ABSPATH')) {
 }
 
 // Get formatter instance
-$formatter = new Bulk_Pricer_Formatter();
+$bulk_pricer_formatter = new Bulk_Pricer_Formatter();
 
 // Get operation details
-$operation_label = $formatter->get_operation_label($operation_type);
-$operation_icon = $formatter->get_operation_icon($operation_type);
+$bulk_pricer_operation_label = $bulk_pricer_formatter->get_operation_label($bulk_pricer_operation_type);
+$bulk_pricer_operation_icon = $bulk_pricer_formatter->get_operation_icon($bulk_pricer_operation_type);
 
 // Get change text
-$change_text = '';
-if ($change_percent > 0) {
-    $change_text = $change_percent . '%';
-} elseif ($change_fixed > 0) {
-    $change_text = number_format($change_fixed) . ' ' . $currency;
+$bulk_pricer_change_text = '';
+if ($bulk_pricer_change_percent > 0) {
+    $bulk_pricer_change_text = $bulk_pricer_change_percent . '%';
+} elseif ($bulk_pricer_change_fixed > 0) {
+    $bulk_pricer_change_text = number_format($bulk_pricer_change_fixed) . ' ' . $bulk_pricer_currency;
 }
 ?>
 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <h2 style="margin: 0 0 15px 0; color: white;">
-        <?php echo $operation_icon; ?> <?php echo esc_html__('Preview Changes', 'bulk-price-discount-editor'); ?>
+        <?php echo wp_kses_post($bulk_pricer_operation_icon); ?> <?php echo esc_html__('Preview Changes', 'bluk-price-discount-editor'); ?>
     </h2>
     <div style="display: flex; gap: 30px; flex-wrap: wrap;">
         <div>
-            <strong>📋 <?php echo esc_html__('Operation:', 'bulk-price-discount-editor'); ?></strong>
-            <?php echo esc_html($operation_label); ?>
+            <strong>📋 <?php echo esc_html__('Operation:', 'bluk-price-discount-editor'); ?></strong>
+            <?php echo esc_html($bulk_pricer_operation_label); ?>
         </div>
-        <?php if ($change_text): ?>
+        <?php if ($bulk_pricer_change_text): ?>
             <div>
-                <strong>📊 <?php echo esc_html__('Change Amount:', 'bulk-price-discount-editor'); ?></strong>
-                <?php echo esc_html($change_text); ?>
+                <strong>📊 <?php echo esc_html__('Change Amount:', 'bluk-price-discount-editor'); ?></strong>
+                <?php echo esc_html($bulk_pricer_change_text); ?>
             </div>
         <?php endif; ?>
         <div>
-            <strong>🔢 <?php echo esc_html__('Total Products:', 'bulk-price-discount-editor'); ?></strong>
+            <strong>🔢 <?php echo esc_html__('Total Products:', 'bluk-price-discount-editor'); ?></strong>
             <?php echo esc_html($total_count); ?>
         </div>
         <div>
-            <strong>🔄 <?php echo esc_html__('Sync:', 'bulk-price-discount-editor'); ?></strong>
-            <?php echo $sync ? '✅ ' . esc_html__('Enabled', 'bulk-price-discount-editor') : '❌ ' . esc_html__('Disabled', 'bulk-price-discount-editor'); ?>
+            <strong>🔄 <?php echo esc_html__('Sync:', 'bluk-price-discount-editor'); ?></strong>
+            <?php echo $bulk_pricer_sync ? '✅ ' . esc_html__('Enabled', 'bluk-price-discount-editor') : '❌ ' . esc_html__('Disabled', 'bluk-price-discount-editor'); ?>
         </div>
     </div>
 </div>

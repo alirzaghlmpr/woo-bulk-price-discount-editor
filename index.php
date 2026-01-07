@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: WooCommerce Bulk Price & Discount Editor Pro
- * Plugin URI: https://yoursite.com
- * Description: Professional bulk price and discount management tool for WooCommerce - ابزار مدیریت قیمت و تخفیف حرفه‌ای
+ * Plugin Name: Bulk Price & Discount Editor for WooCommerce
+ * Plugin URI: https://github.com/alirzaghlmpr/woo-bulk-price-discount-editor
+ * Description: Professional bulk price and discount management tool for WooCommerce
  * Version: 2.0.0
- * Author: Your Name
- * Author URI: https://yoursite.com
- * Text Domain: bulk-price-discount-editor
+ * Author: alireza gholampour
+ * Author URI: https://www.linkedin.com/in/alireza-gholampour-6a0541211
+ * Text Domain: bluk-price-discount-editor
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -39,22 +39,10 @@ require_once BULK_PRICER_PLUGIN_DIR . 'includes/class-bulk-pricer-loader.php';
 /**
  * Initialize the plugin
  */
-function run_bulk_pricer()
+function bulk_pricer_run()
 {
     $plugin = new Bulk_Pricer_Loader();
     $plugin->run();
-}
-
-/**
- * Load plugin text domain for translations
- */
-function bulk_pricer_load_textdomain()
-{
-    load_plugin_textdomain(
-        'bulk-price-discount-editor',
-        false,
-        dirname(BULK_PRICER_PLUGIN_BASENAME) . '/languages/'
-    );
 }
 
 /**
@@ -62,9 +50,6 @@ function bulk_pricer_load_textdomain()
  */
 function bulk_pricer_init()
 {
-    // Load translations
-    bulk_pricer_load_textdomain();
-
     // Check if WooCommerce is active
     if (!class_exists('WooCommerce')) {
         add_action('admin_notices', 'bulk_pricer_wc_missing_notice');
@@ -73,7 +58,7 @@ function bulk_pricer_init()
 
     // Run only in admin
     if (is_admin()) {
-        run_bulk_pricer();
+        bulk_pricer_run();
     }
 }
 

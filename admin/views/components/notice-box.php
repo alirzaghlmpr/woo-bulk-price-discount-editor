@@ -15,16 +15,17 @@ if (!defined('ABSPATH')) {
         <div style="font-size: 40px;">⚠️</div>
         <div>
             <h3 style="margin: 0 0 8px 0; color: white;">
-                <?php echo esc_html__('Warning: Irreversible Operation', 'bulk-price-discount-editor'); ?>
+                <?php echo esc_html__('Warning: Irreversible Operation', 'bluk-price-discount-editor'); ?>
             </h3>
             <p style="margin: 0;">
                 <?php
                 echo sprintf(
-                    esc_html__('By clicking the button below, changes will be %1$spermanently%2$s applied to %3$s%4$d products%5$s.', 'bulk-price-discount-editor'),
+                    /* translators: %1$s and %2$s: opening and closing strong tag, %3$s and %5$s: opening and closing strong tag, %4$d: number of products */
+                    esc_html__('By clicking the button below, changes will be %1$spermanently%2$s applied to %3$s%4$d products%5$s.', 'bluk-price-discount-editor'),
                     '<strong>',
                     '</strong>',
                     '<strong>',
-                    $total_count,
+                    (int) $total_count,
                     '</strong>'
                 );
                 ?>

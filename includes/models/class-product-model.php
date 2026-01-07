@@ -50,13 +50,10 @@ class Bulk_Pricer_Product_Model
 
         // Apply category filter
         if (isset($filters['category_id']) && intval($filters['category_id']) > 0) {
-            $args['tax_query'] = array(
-                array(
-                    'taxonomy' => 'product_cat',
-                    'field'    => 'term_id',
-                    'terms'    => intval($filters['category_id'])
-                )
-            );
+            $category_term = get_term(intval($filters['category_id']), 'product_cat');
+            if ($category_term && !is_wp_error($category_term)) {
+                $args['category'] = array($category_term->slug);
+            }
         }
 
         return wc_get_products($args);

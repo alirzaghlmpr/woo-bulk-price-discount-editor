@@ -7,9 +7,11 @@
  * Usage: php compile-mo.php
  */
 
-// Prevent direct web access
-if (php_sapi_name() !== 'cli' && !defined('ABSPATH')) {
-    die('This script can only be run from command line or WordPress.');
+// Prevent direct file access (allow CLI execution).
+if (!defined('ABSPATH')) {
+    if (php_sapi_name() !== 'cli') {
+        exit;
+    }
 }
 
 /**
@@ -19,7 +21,7 @@ if (php_sapi_name() !== 'cli' && !defined('ABSPATH')) {
  * @param string $mo_file Path to output .mo file
  * @return bool Success status
  */
-function compile_po_to_mo($po_file, $mo_file) {
+function bulk_pricer_compile_po_to_mo($po_file, $mo_file) {
     if (!file_exists($po_file)) {
         return false;
     }
@@ -49,19 +51,19 @@ function compile_po_to_mo($po_file, $mo_file) {
             if ($current_msgid !== '' && $current_msgstr !== '') {
                 $entries[$current_msgid] = $current_msgstr;
             }
-            $current_msgid = parse_po_string(substr($line, 6));
+            $current_msgid = bulk_pricer_parse_po_string(substr($line, 6));
             $current_msgstr = '';
             $in_msgid = true;
             $in_msgstr = false;
         } elseif (strpos($line, 'msgstr ') === 0) {
-            $current_msgstr = parse_po_string(substr($line, 7));
+            $current_msgstr = bulk_pricer_parse_po_string(substr($line, 7));
             $in_msgid = false;
             $in_msgstr = true;
         } elseif ($line[0] === '"') {
             if ($in_msgid) {
-                $current_msgid .= parse_po_string($line);
+                $current_msgid .= bulk_pricer_parse_po_string($line);
             } elseif ($in_msgstr) {
-                $current_msgstr .= parse_po_string($line);
+                $current_msgstr .= bulk_pricer_parse_po_string($line);
             }
         }
     }
@@ -75,13 +77,13 @@ function compile_po_to_mo($po_file, $mo_file) {
     unset($entries['']);
 
     // Write MO file
-    return write_mo_file($mo_file, $entries);
+    return bulk_pricer_write_mo_file($mo_file, $entries);
 }
 
 /**
  * Parse a PO string value
  */
-function parse_po_string($str) {
+function bulk_pricer_parse_po_string($str) {
     $str = trim($str);
     if ($str[0] === '"' && $str[strlen($str) - 1] === '"') {
         $str = substr($str, 1, -1);
@@ -92,7 +94,7 @@ function parse_po_string($str) {
 /**
  * Write MO file
  */
-function write_mo_file($filename, $entries) {
+function bulk_pricer_write_mo_file($filename, $entries) {
     $keys = array_keys($entries);
     $values = array_values($entries);
 
@@ -155,33 +157,33 @@ if (php_sapi_name() === 'cli') {
     echo "MO File Compiler\n";
     echo "========================================\n\n";
 
-    $dir = __DIR__;
-    $files = glob($dir . '/*.po');
+    $bulk_pricer_dir = __DIR__;
+    $bulk_pricer_files = glob($bulk_pricer_dir . '/*.po');
 
-    if (empty($files)) {
-        echo "No .po files found in " . $dir . "\n";
+    if (empty($bulk_pricer_files)) {
+        echo "No .po files found in " . esc_html($bulk_pricer_dir) . "\n";
         exit(1);
     }
 
-    $success = 0;
-    $failed = 0;
+    $bulk_pricer_success = 0;
+    $bulk_pricer_failed = 0;
 
-    foreach ($files as $po_file) {
-        $mo_file = preg_replace('/\.po$/', '.mo', $po_file);
-        $filename = basename($po_file);
+    foreach ($bulk_pricer_files as $bulk_pricer_po_file) {
+        $bulk_pricer_mo_file = preg_replace('/\.po$/', '.mo', $bulk_pricer_po_file);
+        $bulk_pricer_filename = basename($bulk_pricer_po_file);
 
-        echo "Compiling $filename... ";
+        echo "Compiling " . esc_html($bulk_pricer_filename) . "... ";
 
-        if (compile_po_to_mo($po_file, $mo_file)) {
+        if (bulk_pricer_compile_po_to_mo($bulk_pricer_po_file, $bulk_pricer_mo_file)) {
             echo "[OK]\n";
-            $success++;
+            $bulk_pricer_success++;
         } else {
             echo "[FAILED]\n";
-            $failed++;
+            $bulk_pricer_failed++;
         }
     }
 
     echo "\n========================================\n";
-    echo "Results: $success succeeded, $failed failed\n";
+    echo "Results: " . esc_html($bulk_pricer_success) . " succeeded, " . esc_html($bulk_pricer_failed) . " failed\n";
     echo "========================================\n";
 }

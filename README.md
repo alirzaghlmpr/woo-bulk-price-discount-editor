@@ -1,4 +1,16 @@
-# 🏷️ WooCommerce Bulk Price & Discount Editor Pro
+=== Bulk Price & Discount Editor for WooCommerce ===
+Contributors: alirzaghlmpr
+Tags: woocommerce, bulk, price, discount, sale
+Requires at least: 5.8
+Tested up to: 6.4
+Requires PHP: 7.4
+Stable tag: 2.0.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Bulk edit WooCommerce prices and discounts in seconds.
+
+# 🏷️ Bulk Price & Discount Editor for WooCommerce
 
 > **The most powerful and user-friendly WooCommerce price management solution**
 
@@ -77,7 +89,7 @@ A professional WordPress plugin for managing WooCommerce product prices and disc
 
 1. **Download the Plugin**
    ```bash
-   git clone https://github.com/alirzaghlmpr/woo-bulk-price-editor.git
+   git clone https://github.com/yourusername/woocommerce-bulk-price-editor.git
    ```
 
 2. **Upload to WordPress**
@@ -86,7 +98,7 @@ A professional WordPress plugin for managing WooCommerce product prices and disc
 
 3. **Activate**
    - Go to `Plugins > Installed Plugins`
-   - Find "WooCommerce Bulk Price & Discount Editor Pro"
+   - Find "Bulk Price & Discount Editor for WooCommerce"
    - Click "Activate"
 
 4. **Access the Plugin**
@@ -503,6 +515,6 @@ If this plugin helped you, please:
 
 **Made with ❤️ for the WordPress & WooCommerce community**
 
-[⬆ Back to Top](#️-woo-bulk-price--discount-editor-pro)
+[⬆ Back to Top](#️-woocommerce-bulk-price--discount-editor-pro)
 
 </div>
