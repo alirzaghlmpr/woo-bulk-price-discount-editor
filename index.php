@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Bulk Price & Discount Editor for WooCommerce
- * Plugin URI: https://github.com/alirzaghlmpr/woo-bulk-price-discount-editor
+ * Plugin URI: https://github.com/alirzaghlmpr/woo-bulk-price-discount-editor-for-woocommerce
  * Description: Professional bulk price and discount management tool for WooCommerce
  * Version: 2.0.0
  * Author: alireza gholampour
  * Author URI: https://www.linkedin.com/in/alireza-gholampour-6a0541211
- * Text Domain: bluk-price-discount-editor
+ * Text Domain: bulk-price-discount-editor-for-woocommerce
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4

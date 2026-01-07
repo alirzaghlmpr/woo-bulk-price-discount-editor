@@ -27,8 +27,8 @@ class Bulk_Pricer_Admin_Menu
     public function register_menu()
     {
         add_menu_page(
-            __('Bulk Price Editor', 'bluk-price-discount-editor'),
-            __('Bulk Price Editor', 'bluk-price-discount-editor'),
+            __('Bulk Price Editor', 'bulk-price-discount-editor-for-woocommerce'),
+            __('Bulk Price Editor', 'bulk-price-discount-editor-for-woocommerce'),
             'manage_options',
             'theme-bulk-pricer',
             array($this, 'render_admin_page'),
@@ -39,8 +39,8 @@ class Bulk_Pricer_Admin_Menu
         // Add test submenu (can be removed later)
         add_submenu_page(
             'theme-bulk-pricer',
-            __('Translation Test', 'bluk-price-discount-editor'),
-            __('Translation Test', 'bluk-price-discount-editor'),
+            __('Translation Test', 'bulk-price-discount-editor-for-woocommerce'),
+            __('Translation Test', 'bulk-price-discount-editor-for-woocommerce'),
             'manage_options',
             'bulk-pricer-test',
             array($this, 'render_test_page')
@@ -56,7 +56,7 @@ class Bulk_Pricer_Admin_Menu
     {
         // Check user capabilities
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bluk-price-discount-editor'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
         // Load the main admin page view
@@ -71,15 +71,15 @@ class Bulk_Pricer_Admin_Menu
     public function render_test_page()
     {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bluk-price-discount-editor'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
         global $l10n;
         $locale = get_locale();
-        $domain = 'bluk-price-discount-editor';
+        $domain = 'bulk-price-discount-editor-for-woocommerce';
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('Translation Test', 'bluk-price-discount-editor'); ?></h1>
+            <h1><?php esc_html_e('Translation Test', 'bulk-price-discount-editor-for-woocommerce'); ?></h1>
 
             <div class="card" style="max-width: 800px; margin-top: 20px;">
                 <h2>WordPress Language Settings</h2>
@@ -94,7 +94,7 @@ class Bulk_Pricer_Admin_Menu
                     </tr>
                     <tr>
                         <th>Expected MO File:</th>
-                        <td><code>bluk-price-discount-editor-<?php echo esc_html($locale); ?>.mo</code></td>
+                        <td><code>bulk-price-discount-editor-for-woocommerce-<?php echo esc_html($locale); ?>.mo</code></td>
                     </tr>
                 </table>
             </div>
@@ -103,7 +103,7 @@ class Bulk_Pricer_Admin_Menu
                 <h2>Translation Files Status</h2>
                 <?php
                 $languages_dir = BULK_PRICER_PLUGIN_DIR . 'languages/';
-                $mo_file = $languages_dir . "bluk-price-discount-editor-{$locale}.mo";
+                $mo_file = $languages_dir . "bulk-price-discount-editor-for-woocommerce-{$locale}.mo";
                 ?>
                 <table class="form-table">
                     <tr>
@@ -163,13 +163,13 @@ class Bulk_Pricer_Admin_Menu
                         <?php
                         // Test translations with literal strings
                         $test_results = array(
-                            array('original' => 'None', 'translated' => __('None', 'bluk-price-discount-editor')),
-                            array('original' => 'Product Name', 'translated' => __('Product Name', 'bluk-price-discount-editor')),
-                            array('original' => 'Image', 'translated' => __('Image', 'bluk-price-discount-editor')),
-                            array('original' => 'Status', 'translated' => __('Status', 'bluk-price-discount-editor')),
-                            array('original' => 'Regular Price', 'translated' => __('Regular Price', 'bluk-price-discount-editor')),
-                            array('original' => 'Sale Price', 'translated' => __('Sale Price', 'bluk-price-discount-editor')),
-                            array('original' => 'Bulk Price Editor', 'translated' => __('Bulk Price Editor', 'bluk-price-discount-editor'))
+                            array('original' => 'None', 'translated' => __('None', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Product Name', 'translated' => __('Product Name', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Image', 'translated' => __('Image', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Status', 'translated' => __('Status', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Regular Price', 'translated' => __('Regular Price', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Sale Price', 'translated' => __('Sale Price', 'bulk-price-discount-editor-for-woocommerce')),
+                            array('original' => 'Bulk Price Editor', 'translated' => __('Bulk Price Editor', 'bulk-price-discount-editor-for-woocommerce'))
                         );
 
                         foreach ($test_results as $test) {

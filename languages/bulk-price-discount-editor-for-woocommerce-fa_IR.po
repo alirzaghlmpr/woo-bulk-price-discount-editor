@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Bulk Price & Discount Editor Pro 2.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-price-discount-editor\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-price-discount-editor-for-woocommerce\n"
 "POT-Creation-Date: 2025-01-01 00:00:00+00:00\n"
 "PO-Revision-Date: 2025-01-01 00:00+0330\n"
 "Last-Translator: \n"

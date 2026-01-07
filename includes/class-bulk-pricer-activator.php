@@ -26,17 +26,17 @@ class Bulk_Pricer_Activator
     {
         // Check WordPress version
         if (version_compare(get_bloginfo('version'), '5.8', '<')) {
-            wp_die(esc_html__('This plugin requires WordPress 5.8 or higher.', 'bluk-price-discount-editor'));
+            wp_die(esc_html__('This plugin requires WordPress 5.8 or higher.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
         // Check PHP version
         if (version_compare(PHP_VERSION, '7.4', '<')) {
-            wp_die(esc_html__('This plugin requires PHP 7.4 or higher.', 'bluk-price-discount-editor'));
+            wp_die(esc_html__('This plugin requires PHP 7.4 or higher.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
         // Check if WooCommerce is active
         if (!class_exists('WooCommerce')) {
-            wp_die(esc_html__('This plugin requires WooCommerce to be installed and active.', 'bluk-price-discount-editor'));
+            wp_die(esc_html__('This plugin requires WooCommerce to be installed and active.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
         // Flush rewrite rules

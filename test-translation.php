@@ -62,8 +62,8 @@ if (!current_user_can('manage_options')) {
     <?php
     $locale = get_locale();
     $languages_dir = BULK_PRICER_PLUGIN_DIR . 'languages/';
-    $mo_file = $languages_dir . "bulk-price-discount-editor-{$locale}.mo";
-    $po_file = $languages_dir . "bulk-price-discount-editor-{$locale}.po";
+    $mo_file = $languages_dir . "bulk-price-discount-editor-for-woocommerce-{$locale}.mo";
+    $po_file = $languages_dir . "bulk-price-discount-editor-for-woocommerce-{$locale}.po";
     ?>
     <div class="test-item <?php echo file_exists($mo_file) ? 'success' : 'error'; ?>">
         <strong>Expected MO File:</strong> <code><?php echo basename($mo_file); ?></code><br>
@@ -98,7 +98,7 @@ if (!current_user_can('manage_options')) {
     <h2>5. Text Domain Loading Test</h2>
     <?php
     global $l10n;
-    $domain = 'bulk-price-discount-editor';
+    $domain = 'bulk-price-discount-editor-for-woocommerce';
     $is_loaded = isset($l10n[$domain]);
     ?>
     <div class="test-item <?php echo $is_loaded ? 'success' : 'error'; ?>">
@@ -119,16 +119,15 @@ if (!current_user_can('manage_options')) {
             </tr>
             <?php
             $test_strings = array(
-                'None' => 'None',
-                'Product Name' => 'Product Name',
-                'Image' => 'Image',
-                'Status' => 'Status',
-                'Regular Price' => 'Regular Price',
-                'Sale Price' => 'Sale Price'
+                'None' => __('None', 'bulk-price-discount-editor-for-woocommerce'),
+                'Product Name' => __('Product Name', 'bulk-price-discount-editor-for-woocommerce'),
+                'Image' => __('Image', 'bulk-price-discount-editor-for-woocommerce'),
+                'Status' => __('Status', 'bulk-price-discount-editor-for-woocommerce'),
+                'Regular Price' => __('Regular Price', 'bulk-price-discount-editor-for-woocommerce'),
+                'Sale Price' => __('Sale Price', 'bulk-price-discount-editor-for-woocommerce')
             );
 
-            foreach ($test_strings as $original => $expected) {
-                $translated = __($original, 'bulk-price-discount-editor');
+            foreach ($test_strings as $original => $translated) {
                 $is_different = ($translated !== $original);
                 echo '<tr>';
                 echo '<td><code>' . esc_html($original) . '</code></td>';
@@ -173,16 +172,8 @@ if (!current_user_can('manage_options')) {
     </div>
 
     <h2>9. Manual Load Test</h2>
-    <div class="test-item">
-        <?php
-        $manual_load = load_plugin_textdomain(
-            'bulk-price-discount-editor',
-            false,
-            dirname(BULK_PRICER_PLUGIN_BASENAME) . '/languages/'
-        );
-        ?>
-        <strong>Manual load_plugin_textdomain() call:</strong>
-        <?php echo $manual_load ? '<span style="color: green;">✓ SUCCESS</span>' : '<span style="color: orange;">⚠ Returned false (might already be loaded)</span>'; ?>
+    <div class="test-item warning">
+        WordPress.org plugins load translations automatically. No manual load call is required.
     </div>
 
     <div style="margin-top: 40px; padding: 20px; background: #f0f6fc; border-radius: 4px; border-left: 4px solid #2271b1;">

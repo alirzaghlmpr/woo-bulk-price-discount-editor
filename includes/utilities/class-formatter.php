@@ -84,7 +84,7 @@ class Bulk_Pricer_Formatter
     public function format_date($date_object)
     {
         if (!$date_object) {
-            return __('None', 'bluk-price-discount-editor');
+            return __('None', 'bulk-price-discount-editor-for-woocommerce');
         }
         return $date_object->date_i18n('Y/m/d');
     }
@@ -99,10 +99,10 @@ class Bulk_Pricer_Formatter
     public function get_operation_label($operation_type)
     {
         $labels = array(
-            'increase_reg' => __('Increase Regular Price', 'bluk-price-discount-editor'),
-            'decrease_reg' => __('Decrease Regular Price', 'bluk-price-discount-editor'),
-            'set_sale' => __('Apply/Update Sale Price', 'bluk-price-discount-editor'),
-            'remove_discount' => __('Remove All Discounts', 'bluk-price-discount-editor')
+            'increase_reg' => __('Increase Regular Price', 'bulk-price-discount-editor-for-woocommerce'),
+            'decrease_reg' => __('Decrease Regular Price', 'bulk-price-discount-editor-for-woocommerce'),
+            'set_sale' => __('Apply/Update Sale Price', 'bulk-price-discount-editor-for-woocommerce'),
+            'remove_discount' => __('Remove All Discounts', 'bulk-price-discount-editor-for-woocommerce')
         );
         return isset($labels[$operation_type]) ? $labels[$operation_type] : '';
     }

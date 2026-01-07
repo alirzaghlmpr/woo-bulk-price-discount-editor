@@ -157,7 +157,7 @@ Choose **ONE** of these methods:
 
 ### File Structure
 ```
-bulk-price-discount-editor/
+bulk-price-discount-editor-for-woocommerce/
 ├── admin/
 │   ├── class-admin-assets.php      # Asset management
 │   ├── class-admin-menu.php        # Menu registration
@@ -191,11 +191,11 @@ bulk-price-discount-editor/
 │   └── utilities/                  # Helper classes
 │       └── class-formatter.php
 ├── languages/                      # Translation files
-│   ├── bulk-price-discount-editor.pot
-│   ├── bulk-price-discount-editor-en_US.po
-│   ├── bulk-price-discount-editor-en_US.mo
-│   ├── bulk-price-discount-editor-fa_IR.po
-│   ├── bulk-price-discount-editor-fa_IR.mo
+│   ├── bulk-price-discount-editor-for-woocommerce.pot
+│   ├── bulk-price-discount-editor-for-woocommerce-en_US.po
+│   ├── bulk-price-discount-editor-for-woocommerce-en_US.mo
+│   ├── bulk-price-discount-editor-for-woocommerce-fa_IR.po
+│   ├── bulk-price-discount-editor-for-woocommerce-fa_IR.mo
 │   └── compile-mo.php             # MO compiler script
 ├── index.php                       # Plugin bootstrap
 └── README.md                       # This file
@@ -251,12 +251,12 @@ Handles unlimited products without PHP timeout:
 WordPress-native i18n implementation:
 ```php
 // PHP templates
-echo esc_html__('Product Name', 'bulk-price-discount-editor');
+echo esc_html__('Product Name', 'bulk-price-discount-editor-for-woocommerce');
 
 // JavaScript localization
 wp_localize_script('bulk-pricer-admin-js', 'sbp_vars', array(
     'i18n' => array(
-        'loading_preview' => __('Loading preview page', 'bulk-price-discount-editor')
+        'loading_preview' => __('Loading preview page', 'bulk-price-discount-editor-for-woocommerce')
     )
 ));
 ```
@@ -273,13 +273,13 @@ wp_localize_script('bulk-pricer-admin-js', 'sbp_vars', array(
 
 1. **Generate POT Template**
    ```bash
-   wp i18n make-pot . languages/bulk-price-discount-editor.pot
+   wp i18n make-pot . languages/bulk-price-discount-editor-for-woocommerce.pot
    ```
 
 2. **Create Language Files**
-   - Copy `bulk-price-discount-editor.pot` to `bulk-price-discount-editor-{locale}.po`
+   - Copy `bulk-price-discount-editor-for-woocommerce.pot` to `bulk-price-discount-editor-for-woocommerce-{locale}.po`
    - Translate all strings
-   - Example: `bulk-price-discount-editor-fr_FR.po` for French
+   - Example: `bulk-price-discount-editor-for-woocommerce-fr_FR.po` for French
 
 3. **Compile MO Files**
    ```bash

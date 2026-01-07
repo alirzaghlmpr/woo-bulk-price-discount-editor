@@ -26,9 +26,9 @@ echo Compiling translations...
 echo.
 
 REM Compile Persian
-if exist bulk-price-discount-editor-fa_IR.po (
+if exist bulk-price-discount-editor-for-woocommerce-fa_IR.po (
     echo Compiling Persian ^(fa_IR^)...
-    msgfmt -o bulk-price-discount-editor-fa_IR.mo bulk-price-discount-editor-fa_IR.po
+    msgfmt -o bulk-price-discount-editor-for-woocommerce-fa_IR.mo bulk-price-discount-editor-for-woocommerce-fa_IR.po
     if %ERRORLEVEL% EQU 0 (
         echo   [OK] Persian compiled successfully
     ) else (
@@ -41,9 +41,9 @@ if exist bulk-price-discount-editor-fa_IR.po (
 echo.
 
 REM Compile English
-if exist bulk-price-discount-editor-en_US.po (
+if exist bulk-price-discount-editor-for-woocommerce-en_US.po (
     echo Compiling English ^(en_US^)...
-    msgfmt -o bulk-price-discount-editor-en_US.mo bulk-price-discount-editor-en_US.po
+    msgfmt -o bulk-price-discount-editor-for-woocommerce-en_US.mo bulk-price-discount-editor-for-woocommerce-en_US.po
     if %ERRORLEVEL% EQU 0 (
         echo   [OK] English compiled successfully
     ) else (

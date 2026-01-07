@@ -15,33 +15,33 @@ if (!defined('ABSPATH')) {
         <thead>
             <tr>
                 <th style="width: 30px; text-align: center;"></th>
-                <th style="width: 50px; text-align: center;"><?php echo esc_html__('Image', 'bluk-price-discount-editor'); ?></th>
-                <th style="width: 17%;"><?php echo esc_html__('Product Name', 'bluk-price-discount-editor'); ?></th>
-                <th style="width: 7%; text-align: center;"><?php echo esc_html__('Status', 'bluk-price-discount-editor'); ?></th>
+                <th style="width: 50px; text-align: center;"><?php echo esc_html__('Image', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 17%;"><?php echo esc_html__('Product Name', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 7%; text-align: center;"><?php echo esc_html__('Status', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
                 <th style="width: 9%; text-align: center;">
-                    <?php echo esc_html__('Regular Price', 'bluk-price-discount-editor'); ?><br>
-                    <small><?php echo esc_html__('(Before → After)', 'bluk-price-discount-editor'); ?></small>
+                    <?php echo esc_html__('Regular Price', 'bulk-price-discount-editor-for-woocommerce'); ?><br>
+                    <small><?php echo esc_html__('(Before → After)', 'bulk-price-discount-editor-for-woocommerce'); ?></small>
                 </th>
                 <th style="width: 9%; text-align: center;">
-                    <?php echo esc_html__('Sale Price', 'bluk-price-discount-editor'); ?><br>
-                    <small><?php echo esc_html__('(Before → After)', 'bluk-price-discount-editor'); ?></small>
+                    <?php echo esc_html__('Sale Price', 'bulk-price-discount-editor-for-woocommerce'); ?><br>
+                    <small><?php echo esc_html__('(Before → After)', 'bulk-price-discount-editor-for-woocommerce'); ?></small>
                 </th>
                 <th style="width: 8%; text-align: center;">
-                    <?php echo esc_html__('Discount %', 'bluk-price-discount-editor'); ?><br>
-                    <small><?php echo esc_html__('(Before → After)', 'bluk-price-discount-editor'); ?></small>
+                    <?php echo esc_html__('Discount %', 'bulk-price-discount-editor-for-woocommerce'); ?><br>
+                    <small><?php echo esc_html__('(Before → After)', 'bulk-price-discount-editor-for-woocommerce'); ?></small>
                 </th>
-                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Start Date', 'bluk-price-discount-editor'); ?></th>
-                <th style="width: 8%; text-align: center;"><?php echo esc_html__('End Date', 'bluk-price-discount-editor'); ?></th>
-                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Price Difference', 'bluk-price-discount-editor'); ?></th>
-                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Final Price', 'bluk-price-discount-editor'); ?></th>
+                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Start Date', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 8%; text-align: center;"><?php echo esc_html__('End Date', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Price Difference', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 8%; text-align: center;"><?php echo esc_html__('Final Price', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($preview_data as $bulk_pricer_item): ?>
                 <?php
                 $bulk_pricer_status_badge = $bulk_pricer_item['is_on_sale']
-                    ? '<span class="badge-sale">' . esc_html__('On Sale', 'bluk-price-discount-editor') . '</span>'
-                    : '<span style="color: #666;">' . esc_html__('Regular', 'bluk-price-discount-editor') . '</span>';
+                    ? '<span class="badge-sale">' . esc_html__('On Sale', 'bulk-price-discount-editor-for-woocommerce') . '</span>'
+                    : '<span style="color: #666;">' . esc_html__('Regular', 'bulk-price-discount-editor-for-woocommerce') . '</span>';
 
                 $bulk_pricer_row_class = $bulk_pricer_item['price_changed'] ? 'price-changed' : '';
 
@@ -57,7 +57,7 @@ if (!defined('ABSPATH')) {
                     if ($bulk_pricer_item['new_sale'] > 0) {
                         $bulk_pricer_sale_display .= ' <span style="color: #27ae60;">→</span> <strong style="color: #27ae60;">' . esc_html($bulk_pricer_item['new_sale_formatted']) . '</strong>';
                     } else {
-                        $bulk_pricer_sale_display .= ' <span style="color: #e74c3c;">→</span> <strong style="color: #999;">' . esc_html__('Removed', 'bluk-price-discount-editor') . '</strong>';
+                        $bulk_pricer_sale_display .= ' <span style="color: #e74c3c;">→</span> <strong style="color: #999;">' . esc_html__('Removed', 'bulk-price-discount-editor-for-woocommerce') . '</strong>';
                     }
                 } elseif ($bulk_pricer_item['new_sale'] > 0 && $bulk_pricer_item['old_sale'] == $bulk_pricer_item['new_sale']) {
                     $bulk_pricer_sale_display = '<span style="color: #666;">' . esc_html($bulk_pricer_item['new_sale_formatted']) . '</span>';
@@ -94,7 +94,7 @@ if (!defined('ABSPATH')) {
                 ?>
                 <tr class="<?php echo esc_attr($bulk_pricer_row_class); ?>" data-product-id="<?php echo esc_attr($bulk_pricer_item['product_id']); ?>">
                     <td style="text-align: center; padding: 5px;">
-                        <button type="button" class="sbp-delete-row" style="background: #dc3545; color: white; border: none; border-radius: 3px; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; padding: 0;" title="<?php echo esc_attr__('Remove from list', 'bluk-price-discount-editor'); ?>">×</button>
+                        <button type="button" class="sbp-delete-row" style="background: #dc3545; color: white; border: none; border-radius: 3px; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; padding: 0;" title="<?php echo esc_attr__('Remove from list', 'bulk-price-discount-editor-for-woocommerce'); ?>">×</button>
                     </td>
                     <td style="text-align: center; padding: 5px;">
                         <img src="<?php echo esc_url($bulk_pricer_item['image']); ?>" alt="<?php echo esc_attr($bulk_pricer_item['name']); ?>" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd;">
