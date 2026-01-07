@@ -1,15 +1,3 @@
-=== Bulk Price & Discount Editor for WooCommerce ===
-Contributors: alirzaghlmpr
-Tags: woocommerce, bulk, price, discount, sale
-Requires at least: 5.8
-Tested up to: 6.4
-Requires PHP: 7.4
-Stable tag: 2.0.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-
-Bulk edit WooCommerce prices and discounts in seconds.
-
 # 🏷️ Bulk Price & Discount Editor for WooCommerce
 
 > **The most powerful and user-friendly WooCommerce price management solution**
