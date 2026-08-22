@@ -76,6 +76,7 @@ class Bulk_Pricer_Pricing_Calculator
         $new_regular = $current_regular;
         $new_sale = $current_sale;
         $sync_applied = false;
+        $sale_capped = false;
 
         // Validation: both percent and fixed cannot be used together
         if ($operation_type !== 'remove_discount' && $change_percent > 0 && $change_fixed > 0) {
@@ -95,6 +96,15 @@ class Bulk_Pricer_Pricing_Calculator
                         $change_percent,
                         $change_fixed
                     );
+
+                    // Detect when the requested discount would meet/exceed the
+                    // regular price and was therefore capped to 10% off.
+                    $intended_change = $change_percent > 0
+                        ? $current_regular * ($change_percent / 100)
+                        : $change_fixed;
+                    if ($intended_change > 0 && $intended_change >= $current_regular) {
+                        $sale_capped = true;
+                    }
                 }
                 break;
 
@@ -151,7 +161,8 @@ class Bulk_Pricer_Pricing_Calculator
             'new_discount_percent' => $new_discount_percent,
             'price_diff' => $price_diff_data['price_diff'],
             'price_diff_type' => $price_diff_data['price_diff_type'],
-            'sync_applied' => $sync_applied
+            'sync_applied' => $sync_applied,
+            'sale_capped' => $sale_capped
         );
 
         // Return formatted preview data

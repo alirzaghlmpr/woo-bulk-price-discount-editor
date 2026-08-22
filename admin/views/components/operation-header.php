@@ -22,14 +22,15 @@ $bulk_pricer_change_text = '';
 if ($bulk_pricer_change_percent > 0) {
     $bulk_pricer_change_text = $bulk_pricer_change_percent . '%';
 } elseif ($bulk_pricer_change_fixed > 0) {
-    $bulk_pricer_change_text = number_format($bulk_pricer_change_fixed) . ' ' . $bulk_pricer_currency;
+    $bulk_pricer_decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
+    $bulk_pricer_change_text = number_format($bulk_pricer_change_fixed, $bulk_pricer_decimals) . ' ' . $bulk_pricer_currency;
 }
 ?>
-<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-    <h2 style="margin: 0 0 15px 0; color: white;">
+<div class="sbp-op-header">
+    <h2>
         <?php echo wp_kses_post($bulk_pricer_operation_icon); ?> <?php echo esc_html__('Preview Changes', 'bulk-price-discount-editor-for-woocommerce'); ?>
     </h2>
-    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+    <div class="sbp-op-header__meta">
         <div>
             <strong>📋 <?php echo esc_html__('Operation:', 'bulk-price-discount-editor-for-woocommerce'); ?></strong>
             <?php echo esc_html($bulk_pricer_operation_label); ?>

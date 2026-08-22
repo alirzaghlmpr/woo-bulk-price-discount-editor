@@ -46,6 +46,21 @@ function bulk_pricer_run()
 }
 
 /**
+ * Load plugin translations
+ *
+ * Loaded on `init` (per WP 6.7+ guidance) so the text domain is reliably
+ * available regardless of just-in-time loading.
+ */
+function bulk_pricer_load_textdomain()
+{
+    load_plugin_textdomain(
+        'bulk-price-discount-editor-for-woocommerce',
+        false,
+        dirname(BULK_PRICER_PLUGIN_BASENAME) . '/languages'
+    );
+}
+
+/**
  * Check if WooCommerce is active and initialize plugin
  */
 function bulk_pricer_init()
@@ -80,6 +95,9 @@ add_action('before_woocommerce_init', function() {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
     }
 });
+
+// Load translations on init
+add_action('init', 'bulk_pricer_load_textdomain');
 
 // Hook into plugins_loaded to ensure WooCommerce is loaded first
 add_action('plugins_loaded', 'bulk_pricer_init');

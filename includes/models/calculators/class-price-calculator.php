@@ -174,12 +174,17 @@ class Bulk_Pricer_Price_Calculator
     /**
      * Round price with precision
      *
+     * Respects the store's configured number of decimals so the plugin works
+     * for both whole-number currencies (e.g. Toman/Rial) and decimal
+     * currencies (e.g. USD/EUR).
+     *
      * @since 2.0.0
      * @param float $price Price to round
-     * @return int Rounded price
+     * @return float Rounded price
      */
     private function round_price($price)
     {
-        return (int) round($price, 0, PHP_ROUND_HALF_DOWN);
+        $decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
+        return round((float) $price, $decimals, PHP_ROUND_HALF_DOWN);
     }
 }

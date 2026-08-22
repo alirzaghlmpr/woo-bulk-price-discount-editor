@@ -41,13 +41,16 @@ class Bulk_Pricer_Product_Data_Formatter
     /**
      * Format price for display
      *
+     * Respects the store's configured number of decimals.
+     *
      * @since 2.0.0
      * @param float $price Price value
      * @return string Formatted price
      */
     public function format_price($price)
     {
-        return number_format($price);
+        $decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
+        return number_format((float) $price, $decimals);
     }
 
     /**
@@ -61,7 +64,7 @@ class Bulk_Pricer_Product_Data_Formatter
     public function format_sale_price($price, $is_on_sale)
     {
         if ($is_on_sale && $price > 0) {
-            return number_format($price);
+            return $this->format_price($price);
         }
         return '-';
     }
@@ -116,6 +119,7 @@ class Bulk_Pricer_Product_Data_Formatter
             'new_reg' => $price_data['new_regular'],
             'new_reg_formatted' => $this->format_price($price_data['new_regular']),
             'old_sale' => $price_data['old_sale'],
+            'old_sale_formatted' => $price_data['old_sale'] > 0 ? $this->format_price($price_data['old_sale']) : '-',
             'new_sale' => $price_data['new_sale'],
             'new_sale_formatted' => $price_data['new_sale'] > 0 ? $this->format_price($price_data['new_sale']) : '-',
             'new_final' => $this->format_price($price_data['final_price']),
@@ -125,7 +129,8 @@ class Bulk_Pricer_Product_Data_Formatter
             'price_diff' => $price_data['price_diff'],
             'price_diff_formatted' => $this->format_price($price_data['price_diff']),
             'price_diff_type' => $price_data['price_diff_type'],
-            'sync_applied' => $price_data['sync_applied']
+            'sync_applied' => $price_data['sync_applied'],
+            'sale_capped' => !empty($price_data['sale_capped'])
         );
     }
 }

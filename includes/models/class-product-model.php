@@ -60,6 +60,60 @@ class Bulk_Pricer_Product_Model
     }
 
     /**
+     * Get all matching product IDs (expanding variable products into variations)
+     *
+     * Used to take a stable snapshot of the target products before a batch
+     * apply, so that mutating prices mid-run (e.g. with the "only on sale"
+     * filter) cannot shift pagination and cause products to be skipped or
+     * processed twice.
+     *
+     * @since 2.0.1
+     * @param array $filters Filter options
+     * @return int[] Array of product/variation IDs
+     */
+    public function get_all_matching_ids($filters = array())
+    {
+        $args = array(
+            'limit'  => -1,
+            'status' => 'publish',
+            'return' => 'ids',
+        );
+
+        // Apply on sale filter
+        if (isset($filters['only_on_sale']) && $filters['only_on_sale']) {
+            $args['on_sale'] = true;
+        }
+
+        // Apply category filter
+        if (isset($filters['category_id']) && intval($filters['category_id']) > 0) {
+            $category_term = get_term(intval($filters['category_id']), 'product_cat');
+            if ($category_term && !is_wp_error($category_term)) {
+                $args['category'] = array($category_term->slug);
+            }
+        }
+
+        $parent_ids = wc_get_products($args);
+
+        $ids = array();
+        foreach ($parent_ids as $parent_id) {
+            $product = wc_get_product($parent_id);
+            if (!$product) {
+                continue;
+            }
+
+            if ($product->is_type('variable')) {
+                foreach ($product->get_children() as $variation_id) {
+                    $ids[] = (int) $variation_id;
+                }
+            } else {
+                $ids[] = (int) $parent_id;
+            }
+        }
+
+        return $ids;
+    }
+
+    /**
      * Get all product variants (including variable products)
      *
      * @since 2.0.0

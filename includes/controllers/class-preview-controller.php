@@ -92,10 +92,10 @@ class Bulk_Pricer_Preview_Controller
     {
         ob_start();
         ?>
-        <div class="notice notice-warning" style="padding: 20px; border-right: 4px solid #ffb900;">
-            <h3 style="margin-top: 0;">⚠️ <?php echo esc_html__('No products found or invalid input', 'bulk-price-discount-editor-for-woocommerce'); ?></h3>
-            <p style="margin-bottom: 10px;"><b><?php echo esc_html__('Please check the following:', 'bulk-price-discount-editor-for-woocommerce'); ?></b></p>
-            <ul style="list-style: disc; margin-right: 20px;">
+        <div class="notice notice-warning sbp-empty-notice">
+            <h3>⚠️ <?php echo esc_html__('No products found or invalid input', 'bulk-price-discount-editor-for-woocommerce'); ?></h3>
+            <p><b><?php echo esc_html__('Please check the following:', 'bulk-price-discount-editor-for-woocommerce'); ?></b></p>
+            <ul>
                 <li><?php echo esc_html__('Only one of "Percentage" or "Fixed Amount" fields should be filled', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
                 <li><?php echo esc_html__('Products exist with your selected filters', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
                 <li><?php echo esc_html__('Input value is greater than zero', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
@@ -115,8 +115,8 @@ class Bulk_Pricer_Preview_Controller
     {
         ob_start();
         ?>
-        <p style="margin-top: 25px; text-align: center;">
-            <button id="sbp-confirm-btn" class="button button-primary button-hero" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); border: none; padding: 15px 50px; font-size: 16px; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); transition: all 0.3s;">
+        <p class="sbp-confirm-wrap">
+            <button id="sbp-confirm-btn" class="button button-primary button-hero">
                 ✅ <?php echo esc_html__('Confirm and Apply', 'bulk-price-discount-editor-for-woocommerce'); ?>
             </button>
         </p>

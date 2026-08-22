@@ -30,7 +30,7 @@ class Bulk_Pricer_Validator
     {
         // Sanitize operation type
         $operation_type = isset($post_data['operation_type'])
-            ? sanitize_text_field($post_data['operation_type'])
+            ? sanitize_text_field(wp_unslash($post_data['operation_type']))
             : '';
 
         // Validate operation type
@@ -65,8 +65,8 @@ class Bulk_Pricer_Validator
         $sync_sale = isset($post_data['sync_sale']);
 
         // Sanitize sale dates
-        $sale_start = isset($post_data['sale_start']) ? sanitize_text_field($post_data['sale_start']) : '';
-        $sale_expiry = isset($post_data['sale_expiry']) ? sanitize_text_field($post_data['sale_expiry']) : '';
+        $sale_start = isset($post_data['sale_start']) ? sanitize_text_field(wp_unslash($post_data['sale_start'])) : '';
+        $sale_expiry = isset($post_data['sale_expiry']) ? sanitize_text_field(wp_unslash($post_data['sale_expiry'])) : '';
 
         // Return validated and organized data
         return array(

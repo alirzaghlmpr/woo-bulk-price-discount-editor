@@ -10,14 +10,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(238, 90, 111, 0.3);">
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <div style="font-size: 40px;">⚠️</div>
+<div class="sbp-warning-box">
+    <div class="sbp-warning-box__inner">
+        <div class="sbp-warning-box__icon">⚠️</div>
         <div>
-            <h3 style="margin: 0 0 8px 0; color: white;">
+            <h3>
                 <?php echo esc_html__('Warning: Irreversible Operation', 'bulk-price-discount-editor-for-woocommerce'); ?>
             </h3>
-            <p style="margin: 0;">
+            <p>
                 <?php
                 echo sprintf(
                     /* translators: %1$s and %2$s: opening and closing strong tag, %3$s and %5$s: opening and closing strong tag, %4$d: number of products */

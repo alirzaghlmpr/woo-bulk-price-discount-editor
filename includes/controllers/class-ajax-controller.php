@@ -70,6 +70,12 @@ class Bulk_Pricer_Ajax_Controller
         // Security check
         check_ajax_referer('sbp_bulk_nonce', 'security');
 
+        // Capability check (defense in depth - the nonce is not an authorization check)
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Unauthorized');
+            return;
+        }
+
         // Validate and sanitize input
         $validated_data = $this->validator->validate_request($_POST);
         if (!$validated_data) {
@@ -114,6 +120,12 @@ class Bulk_Pricer_Ajax_Controller
         // Security check
         check_ajax_referer('sbp_bulk_nonce', 'security');
 
+        // Capability check (defense in depth - the nonce is not an authorization check)
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Unauthorized');
+            return;
+        }
+
         // Validate input
         $validated_data = $this->validator->validate_request($_POST);
         if (!$validated_data) {
@@ -121,25 +133,46 @@ class Bulk_Pricer_Ajax_Controller
             return;
         }
 
-        $page = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+        $page = isset($_POST['paged']) ? max(1, intval($_POST['paged'])) : 1;
+        $per_page = $this->product_model->get_per_page();
+        $transient_key = 'sbp_apply_ids_' . get_current_user_id();
+
+        // Take a stable snapshot of the target product IDs on the first batch and
+        // reuse it for the remaining batches. This prevents the pagination from
+        // shifting as products are mutated mid-run (e.g. with the "only on sale"
+        // filter), which would otherwise skip or double-process products.
+        if ($page === 1) {
+            $all_ids = $this->product_model->get_all_matching_ids($validated_data['filters']);
+            set_transient($transient_key, $all_ids, HOUR_IN_SECONDS);
+        } else {
+            $all_ids = get_transient($transient_key);
+            if (!is_array($all_ids)) {
+                $all_ids = $this->product_model->get_all_matching_ids($validated_data['filters']);
+                set_transient($transient_key, $all_ids, HOUR_IN_SECONDS);
+            }
+        }
 
         // Get excluded product IDs
         $excluded_ids = array();
         if (isset($_POST['excluded_ids']) && !empty($_POST['excluded_ids'])) {
-            $excluded_ids = json_decode(sanitize_text_field(wp_unslash($_POST['excluded_ids'])), true);
-            if (!is_array($excluded_ids)) {
-                $excluded_ids = array();
+            $decoded = json_decode(sanitize_text_field(wp_unslash($_POST['excluded_ids'])), true);
+            if (is_array($decoded)) {
+                $excluded_ids = array_map('intval', $decoded);
             }
         }
 
-        // Get products
-        $products_result = $this->product_model->get_products_paginated($page, $validated_data['filters']);
-        $products = $this->product_model->get_all_product_variants($products_result);
+        // Process the current slice of the snapshot
+        $offset = ($page - 1) * $per_page;
+        $slice = array_slice($all_ids, $offset, $per_page);
 
-        // Apply changes (skip excluded products)
-        foreach ($products as $product) {
+        foreach ($slice as $product_id) {
             // Skip if product is in excluded list
-            if (in_array($product->get_id(), $excluded_ids)) {
+            if (in_array((int) $product_id, $excluded_ids, true)) {
+                continue;
+            }
+
+            $product = wc_get_product($product_id);
+            if (!$product) {
                 continue;
             }
 
@@ -155,8 +188,11 @@ class Bulk_Pricer_Ajax_Controller
             }
         }
 
-        // Check if more pages remain
-        $has_more = ($page < $products_result->max_num_pages);
+        // Check if more batches remain; clean up the snapshot when finished
+        $has_more = (($offset + $per_page) < count($all_ids));
+        if (!$has_more) {
+            delete_transient($transient_key);
+        }
 
         wp_send_json_success(array('remaining' => $has_more));
     }

@@ -47,7 +47,8 @@ class Bulk_Pricer_Formatter
      */
     public function format_price($price)
     {
-        return number_format($price);
+        $decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
+        return number_format((float) $price, $decimals);
     }
 
     /**
