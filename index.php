@@ -3,7 +3,7 @@
  * Plugin Name: Bulk Price & Discount Editor for WooCommerce
  * Plugin URI: https://github.com/alirzaghlmpr/woo-bulk-price-discount-editor-for-woocommerce
  * Description: Professional bulk price and discount management tool for WooCommerce
- * Version: 2.0.0
+ * Version: 2.1.0
  * Author: alireza gholampour
  * Author URI: https://www.linkedin.com/in/alireza-gholampour-6a0541211
  * Text Domain: bulk-price-discount-editor-for-woocommerce
@@ -22,12 +22,13 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin constants
-define('BULK_PRICER_VERSION', '2.0.0');
+define('BULK_PRICER_VERSION', '2.1.0');
 define('BULK_PRICER_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BULK_PRICER_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BULK_PRICER_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 // Activation/Deactivation hooks
+require_once BULK_PRICER_PLUGIN_DIR . 'includes/class-bulk-pricer-db.php';
 require_once BULK_PRICER_PLUGIN_DIR . 'includes/class-bulk-pricer-activator.php';
 require_once BULK_PRICER_PLUGIN_DIR . 'includes/class-bulk-pricer-deactivator.php';
 register_activation_hook(__FILE__, array('Bulk_Pricer_Activator', 'activate'));
@@ -71,10 +72,9 @@ function bulk_pricer_init()
         return;
     }
 
-    // Run only in admin
-    if (is_admin()) {
-        bulk_pricer_run();
-    }
+    // The loader decides what runs where: admin screens only in wp-admin,
+    // scheduled jobs (Action Scheduler / WP-Cron) on every request.
+    bulk_pricer_run();
 }
 
 /**
@@ -84,7 +84,18 @@ function bulk_pricer_wc_missing_notice()
 {
     ?>
     <div class="notice notice-error">
-        <p><strong>WooCommerce Bulk Price & Discount Editor Pro</strong> requires WooCommerce to be installed and activated.</p>
+        <p>
+            <?php
+            echo wp_kses(
+                sprintf(
+                    /* translators: %s: plugin name */
+                    esc_html__('%s requires WooCommerce to be installed and activated.', 'bulk-price-discount-editor-for-woocommerce'),
+                    '<strong>' . esc_html__('Bulk Price & Discount Editor for WooCommerce', 'bulk-price-discount-editor-for-woocommerce') . '</strong>'
+                ),
+                array('strong' => array())
+            );
+            ?>
+        </p>
     </div>
     <?php
 }

@@ -95,6 +95,11 @@ if (!defined('ABSPATH')) {
                 $bulk_pricer_cap_badge = !empty($bulk_pricer_item['sale_capped'])
                     ? '<br><span class="badge-cap" title="' . esc_attr__('Discount exceeded the price and was limited to 10% off', 'bulk-price-discount-editor-for-woocommerce') . '">' . esc_html__('Capped 10%', 'bulk-price-discount-editor-for-woocommerce') . '</span>'
                     : '';
+
+                // Limited badge (the price floor/ceiling stopped the full change)
+                $bulk_pricer_limit_badge = !empty($bulk_pricer_item['limited'])
+                    ? '<br><span class="badge-cap" title="' . esc_attr__('The change was limited by your minimum/maximum price', 'bulk-price-discount-editor-for-woocommerce') . '">' . esc_html__('Limited', 'bulk-price-discount-editor-for-woocommerce') . '</span>'
+                    : '';
                 ?>
                 <tr class="<?php echo esc_attr($bulk_pricer_row_class); ?>" data-product-id="<?php echo esc_attr($bulk_pricer_item['product_id']); ?>">
                     <td>
@@ -103,7 +108,15 @@ if (!defined('ABSPATH')) {
                     <td>
                         <img class="sbp-thumb" src="<?php echo esc_url($bulk_pricer_item['image']); ?>" alt="<?php echo esc_attr($bulk_pricer_item['name']); ?>">
                     </td>
-                    <td class="sbp-col-name"><strong><?php echo esc_html($bulk_pricer_item['name']); ?></strong></td>
+                    <td class="sbp-col-name">
+                        <strong><?php echo esc_html($bulk_pricer_item['name']); ?></strong>
+                        <?php if (!empty($bulk_pricer_item['is_variation'])) : ?>
+                            <span class="badge-variation"><?php echo esc_html__('Variation', 'bulk-price-discount-editor-for-woocommerce'); ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($bulk_pricer_item['sku'])) : ?>
+                            <br><small class="sbp-muted"><?php echo esc_html($bulk_pricer_item['sku']); ?></small>
+                        <?php endif; ?>
+                    </td>
                     <td><?php echo wp_kses_post($bulk_pricer_status_badge); ?></td>
                     <td><?php echo wp_kses_post($bulk_pricer_reg_display) . ' ' . esc_html($bulk_pricer_currency); ?></td>
                     <td>
@@ -113,6 +126,7 @@ if (!defined('ABSPATH')) {
                         <?php endif; ?>
                         <?php echo wp_kses_post($bulk_pricer_sync_badge); ?>
                         <?php echo wp_kses_post($bulk_pricer_cap_badge); ?>
+                        <?php echo wp_kses_post($bulk_pricer_limit_badge); ?>
                     </td>
                     <td><?php echo wp_kses_post($bulk_pricer_discount_display); ?></td>
                     <td class="sbp-col-date"><?php echo esc_html($bulk_pricer_item['sale_start']); ?></td>

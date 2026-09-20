@@ -27,7 +27,21 @@ A professional WordPress plugin for managing WooCommerce product prices and disc
 - ⬇️ **Decrease Regular Price**: Reduce prices across multiple products
 - 🏷️ **Apply/Update Sale Price**: Set discounts with optional start and end dates
 - ❌ **Remove All Discounts**: Clear sale prices from products in bulk
+- 🎯 **Exact Prices**: Set every selected product's regular or sale price to one exact value
+- 🔼🔽 **Sale Price Only**: Raise or lower just the sale price by percentage or fixed amount
+- 📌 **Make Sale Permanent**: Turn the sale price into the regular price and clear the sale
+- 🔢 **Round Prices Only**: Apply rounding without changing prices otherwise
 - 🔄 **Synchronization**: Keep discount percentages constant when regular prices change
+
+### 🛡️ Safety & Automation (2.1.0)
+- ↩️ **Undo & History**: Every run is recorded with old/new prices per product and can be reverted from the *History* tab (kept 90 days; adjust with the `bulk_pricer_history_retention_days` filter)
+- 🗓️ **Scheduling & Auto-Restore**: Apply changes at a future date/time and automatically put the original prices back later (runs through WooCommerce's bundled Action Scheduler)
+- 🔢 **Price Rounding**: Round to the nearest / up / down to a multiple (e.g. 1000) or use charm endings (`.99`, `99`, `900`)
+- ⛔ **Price Limits**: Never lower a price below, or raise it above, a value you choose
+- 📊 **Whole-catalog Summary**: Products that will change, increases vs. decreases and the net price impact — recalculated live as you remove rows
+- ⬇️ **CSV Export**: Download the complete preview (not just the visible page)
+- 📤 **CSV Import**: Update prices per SKU/ID from a file, with preview, confirmation and undo
+- 🧩 **Variable Products**: Variations are edited individually and the parent product's price range is refreshed automatically
 
 ### 🎨 User Experience
 - **Intuitive Interface**: Clean, modern design with visual feedback
@@ -402,6 +416,26 @@ Contributions are welcome! Here's how you can help:
 ---
 
 ## 📜 Changelog
+
+### Version 2.1.0
+#### ✨ New
+- Undo & change history (per-product old/new prices, resume interrupted runs, CSV download of a run)
+- Scheduled apply and auto-restore via Action Scheduler
+- Price rounding (nearest/up/down multiples, charm endings), price floor/ceiling
+- New operations: exact regular/sale price, increase/decrease sale price only, make sale permanent, round prices only
+- Whole-catalog preview summary, CSV export of the preview, CSV import by SKU/ID
+- Progress bar while applying
+
+#### 🐛 Fixed
+- Variable products: the parent product's stored price and cached variation prices are now refreshed after variations change
+- "Only on sale" now edits only the variations that are on sale (previously every variation of a variable product with any variation on sale)
+- Sale dates from the form were applied to *every* operation (e.g. overwriting schedules on "Increase regular price"); they now only apply to operations that create a sale
+- Sale dates were parsed as UTC and could shift by a day; they now use the site timezone, and the sale end date includes the whole day
+- Sale sync now also covers sales scheduled for the future
+- Preview pages hold exactly 20 rows and the total counts variations (previously a page could hold hundreds of rows)
+- Much faster collection of matching products on large catalogs
+- Decimal amounts can be entered in the fixed amount field
+- Untranslated/incorrect plugin name in the "WooCommerce required" notice
 
 ### Version 2.0.0 (2025-01-01)
 #### 🎉 Major Release - Complete Rewrite

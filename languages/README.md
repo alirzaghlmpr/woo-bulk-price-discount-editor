@@ -31,7 +31,15 @@ msgfmt -o bulk-price-discount-editor-for-woocommerce-fa_IR.mo bulk-price-discoun
 msgfmt -o bulk-price-discount-editor-for-woocommerce-en_US.mo bulk-price-discount-editor-for-woocommerce-en_US.po
 ```
 
-### Method 3: Using WP-CLI
+### Method 3: Using the bundled PHP script (no extra tools)
+
+```bash
+php compile-mo.php
+```
+
+Compiles every `.po` file in this directory to `.mo`. Supports the header (plural rules), plural forms and contexts.
+
+### Method 4: Using WP-CLI
 
 If you have WP-CLI installed:
 
@@ -49,6 +57,10 @@ WordPress will automatically load the correct translation based on your site's l
 2. Set **Site Language** to:
    - `فارسی` (Persian) - Will load `bulk-price-discount-editor-for-woocommerce-fa_IR.mo`
    - `English (United States)` - Will load `bulk-price-discount-editor-for-woocommerce-en_US.mo`
+
+## Updating the Translation Template
+
+The `.pot` file is generated from the strings in the plugin's PHP files (`__()`, `esc_html__()`, `_n()` …). After adding or changing strings, regenerate it with WP-CLI (`wp i18n make-pot . languages/bulk-price-discount-editor-for-woocommerce.pot`) or Poedit (*Update from source*), then update the `.po` files and compile them. JavaScript strings are translated in PHP (see `admin/class-admin-assets.php`).
 
 ## Adding a New Language
 

@@ -99,13 +99,8 @@ class Bulk_Pricer_Formatter
      */
     public function get_operation_label($operation_type)
     {
-        $labels = array(
-            'increase_reg' => __('Increase Regular Price', 'bulk-price-discount-editor-for-woocommerce'),
-            'decrease_reg' => __('Decrease Regular Price', 'bulk-price-discount-editor-for-woocommerce'),
-            'set_sale' => __('Apply/Update Sale Price', 'bulk-price-discount-editor-for-woocommerce'),
-            'remove_discount' => __('Remove All Discounts', 'bulk-price-discount-editor-for-woocommerce')
-        );
-        return isset($labels[$operation_type]) ? $labels[$operation_type] : '';
+        $operation = Bulk_Pricer_Operations::get($operation_type);
+        return $operation ? $operation['label'] : '';
     }
 
     /**
@@ -117,13 +112,113 @@ class Bulk_Pricer_Formatter
      */
     public function get_operation_icon($operation_type)
     {
-        $icons = array(
-            'increase_reg' => '⬆️',
-            'decrease_reg' => '⬇️',
-            'set_sale' => '🏷️',
-            'remove_discount' => '❌'
-        );
-        return isset($icons[$operation_type]) ? $icons[$operation_type] : '';
+        $operation = Bulk_Pricer_Operations::get($operation_type);
+        return $operation ? $operation['icon'] : '';
+    }
+
+    /**
+     * Currency symbol as plain text (no HTML entities)
+     *
+     * @since 2.1.0
+     * @return string
+     */
+    public function get_plain_currency_symbol()
+    {
+        return html_entity_decode(wp_strip_all_tags($this->currency_symbol), ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Describe the amount of an operation ("10%", "5,000 ﷼", "Exact 12,000 ﷼")
+     *
+     * @since 2.1.0
+     * @param array $operation Validated operation data
+     * @return string Plain text ('' when the operation has no amount)
+     */
+    public function describe_amount($operation)
+    {
+        $decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
+        $symbol = $this->get_plain_currency_symbol();
+
+        if (!empty($operation['change_percent'])) {
+            return (float) $operation['change_percent'] . '%';
+        }
+        if (!empty($operation['change_fixed'])) {
+            return number_format((float) $operation['change_fixed'], $decimals) . ' ' . $symbol;
+        }
+        if (!empty($operation['exact_price'])) {
+            return number_format((float) $operation['exact_price'], $decimals) . ' ' . $symbol;
+        }
+
+        return '';
+    }
+
+    /**
+     * Describe the rounding option ("" when rounding is off)
+     *
+     * @since 2.1.0
+     * @param array $operation Validated operation data
+     * @return string Plain text
+     */
+    public function describe_rounding($operation)
+    {
+        $mode = isset($operation['round_mode']) ? $operation['round_mode'] : 'none';
+
+        switch ($mode) {
+            case 'nearest':
+                /* translators: %s: rounding step, e.g. 100 */
+                return sprintf(__('nearest %s', 'bulk-price-discount-editor-for-woocommerce'), (float) $operation['round_step']);
+            case 'up':
+                /* translators: %s: rounding step, e.g. 100 */
+                return sprintf(__('up to a multiple of %s', 'bulk-price-discount-editor-for-woocommerce'), (float) $operation['round_step']);
+            case 'down':
+                /* translators: %s: rounding step, e.g. 100 */
+                return sprintf(__('down to a multiple of %s', 'bulk-price-discount-editor-for-woocommerce'), (float) $operation['round_step']);
+            case 'ending':
+                /* translators: %s: price ending, e.g. .99 */
+                return sprintf(__('ending in %s', 'bulk-price-discount-editor-for-woocommerce'), $operation['round_ending']);
+        }
+
+        return '';
+    }
+
+    /**
+     * One-line description of a whole run, stored with the history entry
+     *
+     * @since 2.1.0
+     * @param array $validated Validated request data (operation + filters)
+     * @return string Plain text
+     */
+    public function describe_operation($validated)
+    {
+        $operation = $validated['operation'];
+        $filters = isset($validated['filters']) ? $validated['filters'] : array();
+
+        $parts = array($this->get_operation_label($operation['operation_type']));
+
+        $amount = $this->describe_amount($operation);
+        if ($amount !== '') {
+            $parts[] = $amount;
+        }
+
+        $rounding = $this->describe_rounding($operation);
+        if ($rounding !== '') {
+            /* translators: %s: rounding description, e.g. "nearest 100" */
+            $parts[] = sprintf(__('Rounding: %s', 'bulk-price-discount-editor-for-woocommerce'), $rounding);
+        }
+
+        if (!empty($filters['category_id'])) {
+            $term = get_term((int) $filters['category_id'], 'product_cat');
+            if ($term && !is_wp_error($term)) {
+                /* translators: %s: category name */
+                $parts[] = sprintf(__('Category: %s', 'bulk-price-discount-editor-for-woocommerce'), $term->name);
+            }
+        }
+
+        if (!empty($filters['only_on_sale'])) {
+            $parts[] = __('Only on-sale products', 'bulk-price-discount-editor-for-woocommerce');
+        }
+
+        return implode(' · ', $parts);
     }
 
     /**

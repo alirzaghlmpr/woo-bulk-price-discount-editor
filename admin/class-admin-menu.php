@@ -29,7 +29,7 @@ class Bulk_Pricer_Admin_Menu
         add_menu_page(
             __('Bulk Price Editor', 'bulk-price-discount-editor-for-woocommerce'),
             __('Bulk Price Editor', 'bulk-price-discount-editor-for-woocommerce'),
-            'manage_options',
+            Bulk_Pricer_Loader::capability(),
             'theme-bulk-pricer',
             array($this, 'render_admin_page'),
             'dashicons-money-alt',
@@ -45,7 +45,7 @@ class Bulk_Pricer_Admin_Menu
     public function render_admin_page()
     {
         // Check user capabilities
-        if (!current_user_can('manage_options')) {
+        if (!current_user_can(Bulk_Pricer_Loader::capability())) {
             wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 

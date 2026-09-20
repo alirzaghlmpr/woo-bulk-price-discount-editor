@@ -15,18 +15,16 @@ if (!defined('ABSPATH')) {
         <div class="sbp-warning-box__icon">⚠️</div>
         <div>
             <h3>
-                <?php echo esc_html__('Warning: Irreversible Operation', 'bulk-price-discount-editor-for-woocommerce'); ?>
+                <?php echo esc_html__('Review before you apply', 'bulk-price-discount-editor-for-woocommerce'); ?>
             </h3>
             <p>
                 <?php
                 echo sprintf(
-                    /* translators: %1$s and %2$s: opening and closing strong tag, %3$s and %5$s: opening and closing strong tag, %4$d: number of products */
-                    esc_html__('By clicking the button below, changes will be %1$spermanently%2$s applied to %3$s%4$d products%5$s.', 'bulk-price-discount-editor-for-woocommerce'),
+                    /* translators: %1$s and %2$s: opening and closing strong tag, %3$d: number of products */
+                    esc_html__('Changes will be applied to %1$s%3$d products%2$s. Every change is recorded in the History tab, where the run can be reverted.', 'bulk-price-discount-editor-for-woocommerce'),
                     '<strong>',
                     '</strong>',
-                    '<strong>',
-                    (int) $total_count,
-                    '</strong>'
+                    (int) $total_count
                 );
                 ?>
             </p>

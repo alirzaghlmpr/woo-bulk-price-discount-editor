@@ -1,167 +1,597 @@
-# Copyright (C) 2025 WooCommerce Bulk Price & Discount Editor Pro
-# This file is distributed under the same license as the WooCommerce Bulk Price & Discount Editor Pro package.
+# Translation template for Bulk Price & Discount Editor for WooCommerce.
+# Copyright (C) 2026 alireza gholampour
+# This file is distributed under the same license as the plugin (GPL v2 or later).
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Bulk Price & Discount Editor Pro 2.0.0\n"
+"Project-Id-Version: Bulk Price & Discount Editor for WooCommerce 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-price-discount-editor-for-woocommerce\n"
-"POT-Creation-Date: 2025-01-01 00:00:00+00:00\n"
+"POT-Creation-Date: 2026-09-20T19:32:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Domain: bulk-price-discount-editor-for-woocommerce\n"
 
-#: index.php:86
-msgid "WooCommerce is Required"
+#: admin/class-admin-assets.php:62
+msgid "Loading preview page"
 msgstr ""
 
-#: index.php:87
-msgid "WooCommerce Bulk Price & Discount Editor Pro requires WooCommerce to be installed and activated."
+#: admin/class-admin-assets.php:63
+msgid "Processing..."
+msgstr ""
+
+#: admin/class-admin-assets.php:64
+msgid "⏳ Applying changes"
+msgstr ""
+
+#: admin/class-admin-assets.php:65
+msgid "⏳ Reverting changes"
+msgstr ""
+
+#: admin/class-admin-assets.php:66
+msgid "Are you sure you want to apply changes to all products?"
+msgstr ""
+
+#: admin/class-admin-assets.php:67
+msgid "Schedule these changes?"
+msgstr ""
+
+#: admin/class-admin-assets.php:68
+msgid "Apply the prices from this file?"
+msgstr ""
+
+#: admin/class-admin-assets.php:69
+msgid ""
+"Revert this run? Each product goes back to the prices it had before this "
+"run, including changes made to it since."
+msgstr ""
+
+#: admin/class-admin-assets.php:70
+msgid "Delete this entry? It can no longer be reverted."
+msgstr ""
+
+#: admin/class-admin-assets.php:71
+msgid "Cancel this run? Nothing will be changed."
+msgstr ""
+
+#: admin/class-admin-assets.php:72
+msgid "Apply this run now instead of waiting for its schedule?"
+msgstr ""
+
+#: admin/class-admin-assets.php:73
+msgid ""
+"✅ Changes successfully applied. You can undo them from the History tab."
+msgstr ""
+
+#: admin/class-admin-assets.php:74
+msgid "✅ Prices imported. You can undo them from the History tab."
+msgstr ""
+
+#: admin/class-admin-assets.php:75
+msgid "✅ The run was reverted."
+msgstr ""
+
+#: admin/class-admin-assets.php:76
+msgid "Open History"
+msgstr ""
+
+#: admin/class-admin-assets.php:77
+msgid "✅ Confirm and Apply"
+msgstr ""
+
+#: admin/class-admin-assets.php:78
+msgid "🗓️ Schedule Changes"
+msgstr ""
+
+#: admin/class-admin-assets.php:79
+msgid "Error connecting to server"
+msgstr ""
+
+#: admin/class-admin-assets.php:80
+msgid "Error applying changes"
+msgstr ""
+
+#: admin/class-admin-assets.php:81
+msgid ""
+"The run was interrupted. You can resume or revert it from the History tab."
+msgstr ""
+
+#. translators: 1: number of products, 2: date and time the changes are applied
+#: admin/class-admin-assets.php:83
+#, php-format
+msgid "🗓️ Scheduled: %1$d products will be updated on %2$s."
+msgstr ""
+
+#. translators: %s: date and time the original prices are restored
+#: admin/class-admin-assets.php:85
+#, php-format
+msgid "Original prices will be restored on %s."
+msgstr ""
+
+#: admin/class-admin-assets.php:86
+#: admin/views/partials/preview-table.php:106
+msgid "Remove from list"
+msgstr ""
+
+#: admin/class-admin-assets.php:87
+msgid "Include again"
+msgstr ""
+
+#. translators: 1: products calculated so far, 2: total products
+#: admin/class-admin-assets.php:89
+#, php-format
+msgid "Calculating for all products… %1$d / %2$d"
+msgstr ""
+
+#: admin/class-admin-assets.php:90
+msgid "Could not calculate the summary."
+msgstr ""
+
+#. translators: %d: number of products whose price goes up
+#: admin/class-admin-assets.php:92
+#, php-format
+msgid "%d up"
+msgstr ""
+
+#. translators: %d: number of products whose price goes down
+#: admin/class-admin-assets.php:94
+#, php-format
+msgid "%d down"
+msgstr ""
+
+#. translators: %d: number of products with another kind of change
+#: admin/class-admin-assets.php:96
+#, php-format
+msgid "%d other"
+msgstr ""
+
+#. translators: %s: average price change, e.g. +4.5%
+#: admin/class-admin-assets.php:98
+#, php-format
+msgid "avg %s"
+msgstr ""
+
+#. translators: 1: products processed so far, 2: total products
+#: admin/class-admin-assets.php:100
+#, php-format
+msgid "%1$d / %2$d"
+msgstr ""
+
+#: admin/class-admin-assets.php:101
+msgid "Loading…"
+msgstr ""
+
+#: admin/class-admin-menu.php:30
+#: admin/class-admin-menu.php:31
+msgid "Bulk Price Editor"
+msgstr ""
+
+#: admin/class-admin-menu.php:49
+#: includes/controllers/class-base-controller.php:47
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
 #: admin/views/admin-page.php:16
+msgid "Bulk Editor"
+msgstr ""
+
+#: admin/views/admin-page.php:17
+msgid "Import CSV"
+msgstr ""
+
+#: admin/views/admin-page.php:18
+msgid "History"
+msgstr ""
+
+#: admin/views/admin-page.php:29
 msgid "Bulk Price & Discount Manager (Pro)"
 msgstr ""
 
-#: admin/views/admin-page.php:26
-msgid "Preview & Review Changes"
+#: admin/views/components/notice-box.php:18
+msgid "Review before you apply"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:15
-msgid "Operation Type"
+#. translators: %1$s and %2$s: opening and closing strong tag, %3$d: number of products
+#: admin/views/components/notice-box.php:24
+#, php-format
+msgid ""
+"Changes will be applied to %1$s%3$d products%2$s. Every change is "
+"recorded in the History tab, where the run can be reverted."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:18
-msgid "Increase Regular Price"
+#: admin/views/components/operation-header.php:29
+msgid "Preview Changes"
+msgstr ""
+
+#: admin/views/components/operation-header.php:33
+msgid "Operation:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:38
+msgid "Change Amount:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:44
+msgid "Rounding:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:49
+msgid "Total Products:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:54
+msgid "Sync:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:55
+msgid "Enabled"
+msgstr ""
+
+#: admin/views/components/operation-header.php:55
+msgid "Disabled"
+msgstr ""
+
+#: admin/views/components/operation-header.php:60
+msgid "Applies on:"
+msgstr ""
+
+#: admin/views/components/operation-header.php:66
+msgid "Restores on:"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:19
+msgid "In scope"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:23
+#: includes/services/class-csv-service.php:107
+msgid "Will change"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:28
+msgid "Unchanged"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:32
+msgid "Excluded"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:36
+msgid "Net price impact"
+msgstr ""
+
+#: admin/views/components/summary-bar.php:44
+msgid "Export all as CSV"
 msgstr ""
 
 #: admin/views/partials/form-fields.php:19
-msgid "Decrease Regular Price"
+msgid "Operation Type"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:20
-msgid "Apply/Update Sale Price"
+#: admin/views/partials/form-fields.php:37
+msgid ""
+"Rounds the current prices using the rounding options below without "
+"changing them otherwise."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:21
-msgid "Remove All Discounts"
+#: admin/views/partials/form-fields.php:40
+msgid ""
+"The sale price becomes the regular price and the sale is removed. Only "
+"products with a sale price are affected."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:26
+#: admin/views/partials/form-fields.php:43
+msgid ""
+"Changes only the sale price, by a percentage or fixed amount of the "
+"current sale price. Only products with a sale price are affected."
+msgstr ""
+
+#: admin/views/partials/form-fields.php:48
 msgid "Change Amount"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:30
+#: admin/views/partials/form-fields.php:52
 msgid "Percentage (%)"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:31
+#: admin/views/partials/form-fields.php:53
 msgid "e.g. 10"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:34
+#: admin/views/partials/form-fields.php:56
 msgid "Fixed Amount"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:35
+#: admin/views/partials/form-fields.php:57
 msgid "e.g. 5000"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:39
+#: admin/views/partials/form-fields.php:61
 msgid "Only one"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:39
-msgid "of the two fields above should be filled. If both are filled, no changes will be applied."
+#: admin/views/partials/form-fields.php:61
+msgid ""
+"of the two fields above should be filled. If both are filled, no changes "
+"will be applied."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:44
+#: admin/views/partials/form-fields.php:66
+msgid "New Price"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:68
+msgid "e.g. 12000"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:70
+msgid "Every selected product gets exactly this price."
+msgstr ""
+
+#: admin/views/partials/form-fields.php:74
 msgid "Advanced Settings"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:48
+#: admin/views/partials/form-fields.php:78
 msgid "Product Filter:"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:48
+#: admin/views/partials/form-fields.php:78
 msgid "Process only products currently on sale"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:52
+#: admin/views/partials/form-fields.php:82
 msgid "Sync Sale Price:"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:52
+#: admin/views/partials/form-fields.php:82
 msgid "When changing regular price, also change sale price proportionally"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:54
-msgid "With this option enabled, the discount percentage stays constant and the sale price changes accordingly."
+#: admin/views/partials/form-fields.php:84
+msgid ""
+"With this option enabled, the discount percentage stays constant and the "
+"sale price changes accordingly."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:55
-msgid "Example: If discount was 20%, it will remain 20% after the regular price change."
+#: admin/views/partials/form-fields.php:85
+msgid ""
+"Example: If discount was 20%, it will remain 20% after the regular price "
+"change."
 msgstr ""
 
-#: admin/views/partials/form-fields.php:61
+#: admin/views/partials/form-fields.php:91
 msgid "Category"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:67
+#: admin/views/partials/form-fields.php:97
 msgid "All Categories"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:76
+#: admin/views/partials/form-fields.php:105
+msgid "Price Rounding"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:108
+msgid "No rounding (store decimals)"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:109
+msgid "Round to the nearest multiple of…"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:110
+msgid "Round up to a multiple of…"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:111
+msgid "Round down to a multiple of…"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:112
+msgid "Make prices end in…"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:115
+msgid "e.g. 1000"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:118
+msgid "e.g. 99, .99 or 900"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:121
+msgid ""
+"Example: a step of 1000 turns 12,340 into 12,000 (nearest), 13,000 (up) "
+"or 12,000 (down)."
+msgstr ""
+
+#: admin/views/partials/form-fields.php:124
+msgid ""
+"Example: \".99\" turns 19.60 into 19.99; \"900\" turns 12,340 into "
+"11,900; \"99\" turns 1,234 into 1,199. Uses the closest price with that "
+"ending."
+msgstr ""
+
+#: admin/views/partials/form-fields.php:129
+msgid "Price Limits"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:133
+msgid "Never lower a price below"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:134
+msgid "No minimum"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:137
+msgid "Never raise a price above"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:138
+msgid "No maximum"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:142
+msgid ""
+"Protects against going too low or too high. A product already outside the "
+"limit is left as it is, never pushed further."
+msgstr ""
+
+#: admin/views/partials/form-fields.php:147
 msgid "Sale Start Date"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:79
+#: admin/views/partials/form-fields.php:150
 msgid "For 'Apply Sale Price' operation, you can set a start date"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:83
+#: admin/views/partials/form-fields.php:154
 msgid "Sale End Date"
 msgstr ""
 
-#: admin/views/partials/form-fields.php:86
+#: admin/views/partials/form-fields.php:157
 msgid "For 'Apply Sale Price' operation, you can set an expiry date"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:161
+msgid "When to Apply"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:165
+msgid "Apply immediately after confirming"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:169
+msgid "Schedule for later"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:177
+msgid "Auto-Restore"
+msgstr ""
+
+#: admin/views/partials/form-fields.php:181
+msgid ""
+"Optional. Automatically put the original prices back at this time — handy "
+"for time-limited campaigns."
+msgstr ""
+
+#. translators: %s: site timezone, e.g. Asia/Tehran
+#: admin/views/partials/form-fields.php:186
+#, php-format
+msgid ""
+"Times use the site timezone (%s). Scheduled changes run through "
+"WooCommerce's Action Scheduler, which needs site visits or a server cron "
+"to fire."
+msgstr ""
+
+#: admin/views/partials/import-preview.php:22
+msgid "Ready to update"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:26
+msgid "Already up to date"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:30
+msgid "Rows with problems"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:35
+msgid "Duplicate rows (last one used)"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:43
+msgid "Rows with problems (these will be skipped)"
+msgstr ""
+
+#. translators: 1: CSV line number, 2: problem description
+#: admin/views/partials/import-preview.php:50
+#, php-format
+msgid "Line %1$d: %2$s"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:66
+#: admin/views/partials/preview-table.php:19
+#: admin/views/partials/run-details.php:22
+msgid "Product Name"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:67
+#: admin/views/partials/preview-table.php:22
+#: admin/views/partials/run-details.php:23
+msgid "Regular Price"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:67
+#: admin/views/partials/import-preview.php:68
+#: admin/views/partials/preview-table.php:23
+#: admin/views/partials/preview-table.php:27
+#: admin/views/partials/preview-table.php:31
+msgid "(Before → After)"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:68
+#: admin/views/partials/preview-table.php:26
+#: admin/views/partials/run-details.php:24
+msgid "Sale Price"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:69
+#: admin/views/partials/preview-table.php:33
+msgid "Start Date"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:70
+#: admin/views/partials/preview-table.php:34
+msgid "End Date"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:102
+#: admin/views/partials/preview-table.php:60
+msgid "Removed"
+msgstr ""
+
+#. translators: 1: rows shown, 2: total rows
+#: admin/views/partials/import-preview.php:118
+#, php-format
+msgid "Showing the first %1$d of %2$d rows."
+msgstr ""
+
+#. translators: %d: number of products
+#: admin/views/partials/import-preview.php:132
+#, php-format
+msgid "Apply to %d product"
+msgid_plural "Apply to %d products"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/views/partials/import-preview.php:137
+msgid "Discard"
+msgstr ""
+
+#: admin/views/partials/import-preview.php:140
+msgid "Nothing to import from this file."
+msgstr ""
+
+#: admin/views/partials/pagination.php:24
+msgid "Page:"
 msgstr ""
 
 #: admin/views/partials/preview-table.php:18
 msgid "Image"
 msgstr ""
 
-#: admin/views/partials/preview-table.php:19
-msgid "Product Name"
-msgstr ""
-
 #: admin/views/partials/preview-table.php:20
+#: admin/views/tabs/history.php:46
 msgid "Status"
-msgstr ""
-
-#: admin/views/partials/preview-table.php:22
-msgid "Regular Price"
-msgstr ""
-
-#: admin/views/partials/preview-table.php:23
-msgid "(Before → After)"
-msgstr ""
-
-#: admin/views/partials/preview-table.php:26
-msgid "Sale Price"
 msgstr ""
 
 #: admin/views/partials/preview-table.php:30
 msgid "Discount %"
-msgstr ""
-
-#: admin/views/partials/preview-table.php:33
-msgid "Start Date"
-msgstr ""
-
-#: admin/views/partials/preview-table.php:34
-msgid "End Date"
 msgstr ""
 
 #: admin/views/partials/preview-table.php:35
@@ -180,15 +610,654 @@ msgstr ""
 msgid "Regular"
 msgstr ""
 
-#: admin/views/partials/preview-table.php:56
-msgid "Removed"
+#: admin/views/partials/preview-table.php:96
+msgid "Discount exceeded the price and was limited to 10% off"
 msgstr ""
 
-#: admin/views/partials/preview-table.php:93
-msgid "Remove from list"
+#: admin/views/partials/preview-table.php:96
+msgid "Capped 10%"
 msgstr ""
 
-#: includes/models/handlers/class-date-handler.php:24
-#: includes/models/handlers/class-date-handler.php:50
+#: admin/views/partials/preview-table.php:101
+msgid "The change was limited by your minimum/maximum price"
+msgstr ""
+
+#: admin/views/partials/preview-table.php:101
+msgid "Limited"
+msgstr ""
+
+#: admin/views/partials/preview-table.php:114
+msgid "Variation"
+msgstr ""
+
+#: admin/views/partials/run-details.php:23
+#: admin/views/partials/run-details.php:24
+msgid "Before → After"
+msgstr ""
+
+#: admin/views/partials/run-details.php:25
+#: includes/services/class-csv-service.php:161
+msgid "State"
+msgstr ""
+
+#: admin/views/partials/run-details.php:56
+#: admin/views/tabs/history.php:23
+#: includes/services/class-csv-service.php:182
+msgid "Reverted"
+msgstr ""
+
+#: admin/views/partials/run-details.php:57
+#: admin/views/tabs/history.php:21
+#: includes/services/class-csv-service.php:181
+msgid "Applied"
+msgstr ""
+
+#. translators: 1: rows shown, 2: total changed products
+#: admin/views/partials/run-details.php:69
+#, php-format
+msgid "Showing the first %1$d of %2$d changed products."
+msgstr ""
+
+#: admin/views/partials/run-details.php:77
+msgid "Download full list as CSV"
+msgstr ""
+
+#: admin/views/tabs/editor.php:19
+msgid "Preview & Review Changes"
+msgstr ""
+
+#: admin/views/tabs/history.php:18
+msgid "Awaiting confirmation"
+msgstr ""
+
+#: admin/views/tabs/history.php:19
+msgid "Scheduled"
+msgstr ""
+
+#: admin/views/tabs/history.php:20
+msgid "Interrupted / in progress"
+msgstr ""
+
+#: admin/views/tabs/history.php:22
+msgid "Reverting (interrupted)"
+msgstr ""
+
+#: admin/views/tabs/history.php:24
+msgid "Cancelled"
+msgstr ""
+
+#: admin/views/tabs/history.php:30
+msgid "Change history"
+msgstr ""
+
+#: admin/views/tabs/history.php:32
+msgid ""
+"Every applied change is recorded with the old and new prices, so you can "
+"revert it. Reverting puts each product back to the values it had before "
+"that run, including changes made to it since. Finished runs are kept for "
+"90 days."
+msgstr ""
+
+#: admin/views/tabs/history.php:36
+msgid "No changes have been made yet."
+msgstr ""
+
+#: admin/views/tabs/history.php:42
+msgid "Date"
+msgstr ""
+
+#: admin/views/tabs/history.php:43
+msgid "User"
+msgstr ""
+
+#: admin/views/tabs/history.php:44
+msgid "Operation"
+msgstr ""
+
+#: admin/views/tabs/history.php:45
+msgid "Changed"
+msgstr ""
+
+#: admin/views/tabs/history.php:47
+msgid "Actions"
+msgstr ""
+
+#. translators: %s: date and time
+#: admin/views/tabs/history.php:79
+#, php-format
+msgid "Applies on %s"
+msgstr ""
+
+#: admin/views/tabs/history.php:83
+#: admin/views/tabs/history.php:95
+msgid "overdue"
+msgstr ""
+
+#. translators: %s: date and time
+#: admin/views/tabs/history.php:91
+#, php-format
+msgid "Prices restore on %s"
+msgstr ""
+
+#. translators: 1: changed products, 2: total products
+#: admin/views/tabs/history.php:104
+#, php-format
+msgid "%1$d of %2$d"
+msgstr ""
+
+#: admin/views/tabs/history.php:118
+msgid "Revert"
+msgstr ""
+
+#: admin/views/tabs/history.php:124
+msgid "Resume"
+msgstr ""
+
+#: admin/views/tabs/history.php:130
+msgid "Run now"
+msgstr ""
+
+#: admin/views/tabs/history.php:136
+msgid "Cancel"
+msgstr ""
+
+#: admin/views/tabs/history.php:142
+msgid "Details"
+msgstr ""
+
+#: admin/views/tabs/history.php:148
+msgid "Delete"
+msgstr ""
+
+#: admin/views/tabs/import.php:14
+msgid "Update prices from a CSV file"
+msgstr ""
+
+#: admin/views/tabs/import.php:15
+msgid ""
+"Upload a CSV to set exact prices per product. You will see a preview and "
+"confirm before anything is changed, and the import is recorded in History "
+"so it can be undone."
+msgstr ""
+
+#: admin/views/tabs/import.php:20
+msgid "Column"
+msgstr ""
+
+#: admin/views/tabs/import.php:21
+msgid "Meaning"
+msgstr ""
+
+#: admin/views/tabs/import.php:27
+msgid ""
+"Required. Identifies the product. For variable products use the SKU or ID "
+"of the variation."
+msgstr ""
+
+#: admin/views/tabs/import.php:31
+msgid "New regular price. Leave empty to keep the current one."
+msgstr ""
+
+#: admin/views/tabs/import.php:35
+msgid ""
+"New sale price. Use 0 to remove the sale. Leave empty to keep the current "
+"one."
+msgstr ""
+
+#: admin/views/tabs/import.php:39
+msgid "Optional sale dates as YYYY-MM-DD (site timezone)."
+msgstr ""
+
+#: admin/views/tabs/import.php:43
+msgid ""
+"Comma, semicolon or tab separated files are accepted. Example: "
+"sku,regular_price,sale_price"
+msgstr ""
+
+#: admin/views/tabs/import.php:49
+msgid "Upload & Preview"
+msgstr ""
+
+#: includes/class-bulk-pricer-activator.php:29
+msgid "This plugin requires WordPress 5.8 or higher."
+msgstr ""
+
+#: includes/class-bulk-pricer-activator.php:34
+msgid "This plugin requires PHP 7.4 or higher."
+msgstr ""
+
+#: includes/class-bulk-pricer-activator.php:39
+msgid "This plugin requires WooCommerce to be installed and active."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:192
+#: includes/controllers/class-ajax-controller.php:258
+msgid "No products to update."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:200
+msgid "Could not start the run."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:215
+msgid "This run can no longer be applied."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:248
+msgid "Choose a date and time to schedule the changes."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:263
+msgid "Could not schedule the run."
+msgstr ""
+
+#: includes/controllers/class-ajax-controller.php:268
+msgid "The schedule could not be created."
+msgstr ""
+
+#: includes/controllers/class-base-controller.php:33
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/controllers/class-base-controller.php:65
+msgid "Invalid input data"
+msgstr ""
+
+#: includes/controllers/class-csv-controller.php:96
+msgid "Choose a CSV file to upload."
+msgstr ""
+
+#: includes/controllers/class-csv-controller.php:103
+msgid "Only .csv files are supported."
+msgstr ""
+
+#: includes/controllers/class-csv-controller.php:106
+msgid "The file is too large (5 MB maximum)."
+msgstr ""
+
+#: includes/controllers/class-csv-controller.php:109
+msgid "The upload could not be verified."
+msgstr ""
+
+#: includes/controllers/class-csv-controller.php:121
+msgid "Could not stage the import."
+msgstr ""
+
+#: includes/controllers/class-history-controller.php:69
+msgid "This run cannot be reverted."
+msgstr ""
+
+#: includes/controllers/class-history-controller.php:91
+msgid "This run cannot be cancelled."
+msgstr ""
+
+#: includes/controllers/class-history-controller.php:110
+#: includes/controllers/class-history-controller.php:134
+#: includes/controllers/class-history-controller.php:173
+msgid "Run not found."
+msgstr ""
+
+#: includes/controllers/class-history-controller.php:115
+msgid "Finish reverting this run before deleting it."
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:99
+msgid "No products found or invalid input"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:100
+msgid "Please check the following:"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:102
+msgid "Products exist with your selected filters"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:103
+msgid ""
+"Operations that use an existing sale price (increase/decrease sale, make "
+"permanent, remove discounts) only list products that already have a sale "
+"price"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:104
+msgid "Input value is greater than zero"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:125
+msgid "Schedule Changes"
+msgstr ""
+
+#: includes/controllers/class-preview-controller.php:127
+msgid "Confirm and Apply"
+msgstr ""
+
+#: includes/models/class-operations.php:48
+msgid "Increase Regular Price"
+msgstr ""
+
+#: includes/models/class-operations.php:57
+msgid "Decrease Regular Price"
+msgstr ""
+
+#: includes/models/class-operations.php:66
+msgid "Set Exact Regular Price"
+msgstr ""
+
+#: includes/models/class-operations.php:75
+msgid "Apply/Update Sale Price"
+msgstr ""
+
+#: includes/models/class-operations.php:84
+msgid "Set Exact Sale Price"
+msgstr ""
+
+#: includes/models/class-operations.php:93
+msgid "Increase Sale Price Only"
+msgstr ""
+
+#: includes/models/class-operations.php:102
+msgid "Decrease Sale Price Only"
+msgstr ""
+
+#: includes/models/class-operations.php:111
+msgid "Make Sale Permanent (Sale → Regular)"
+msgstr ""
+
+#: includes/models/class-operations.php:120
+msgid "Remove All Discounts"
+msgstr ""
+
+#: includes/models/class-operations.php:129
+msgid "Round Prices Only"
+msgstr ""
+
+#: includes/models/class-operations.php:164
+msgid "Regular price"
+msgstr ""
+
+#: includes/models/class-operations.php:165
+msgid "Sale price"
+msgstr ""
+
+#: includes/models/class-operations.php:166
+msgid "Other"
+msgstr ""
+
+#: includes/models/handlers/class-date-handler.php:63
+#: includes/utilities/class-formatter.php:88
 msgid "None"
+msgstr ""
+
+#: includes/services/class-csv-service.php:95
+#: includes/services/class-csv-service.php:153
+msgid "ID"
+msgstr ""
+
+#: includes/services/class-csv-service.php:96
+#: includes/services/class-csv-service.php:154
+msgid "Parent ID"
+msgstr ""
+
+#: includes/services/class-csv-service.php:97
+#: includes/services/class-csv-service.php:155
+msgid "SKU"
+msgstr ""
+
+#: includes/services/class-csv-service.php:98
+#: includes/services/class-csv-service.php:156
+msgid "Name"
+msgstr ""
+
+#: includes/services/class-csv-service.php:99
+#: includes/services/class-csv-service.php:157
+msgid "Old regular price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:100
+#: includes/services/class-csv-service.php:158
+msgid "New regular price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:101
+#: includes/services/class-csv-service.php:159
+msgid "Old sale price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:102
+#: includes/services/class-csv-service.php:160
+msgid "New sale price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:103
+msgid "Old final price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:104
+msgid "New final price"
+msgstr ""
+
+#: includes/services/class-csv-service.php:105
+msgid "Old discount %"
+msgstr ""
+
+#: includes/services/class-csv-service.php:106
+msgid "New discount %"
+msgstr ""
+
+#: includes/services/class-csv-service.php:135
+msgid "Yes"
+msgstr ""
+
+#: includes/services/class-csv-service.php:135
+msgid "No"
+msgstr ""
+
+#: includes/services/class-csv-service.php:207
+msgid "The uploaded file could not be read."
+msgstr ""
+
+#: includes/services/class-csv-service.php:213
+msgid "The CSV file is empty."
+msgstr ""
+
+#: includes/services/class-csv-service.php:222
+msgid "The CSV needs a \"sku\" or \"id\" column to find products."
+msgstr ""
+
+#: includes/services/class-csv-service.php:226
+msgid ""
+"The CSV needs at least one of: regular_price, sale_price, sale_start, "
+"sale_end."
+msgstr ""
+
+#. translators: %d: maximum number of rows
+#: includes/services/class-csv-service.php:248
+#, php-format
+msgid "Stopped reading: a single import is limited to %d rows."
+msgstr ""
+
+#. translators: %s: SKU
+#: includes/services/class-csv-service.php:317
+#, php-format
+msgid "No product found with SKU \"%s\"."
+msgstr ""
+
+#: includes/services/class-csv-service.php:318
+msgid "Missing product SKU or ID."
+msgstr ""
+
+#. translators: %d: product ID
+#: includes/services/class-csv-service.php:324
+#, php-format
+msgid "Product #%d does not exist."
+msgstr ""
+
+#. translators: %d: product ID
+#: includes/services/class-csv-service.php:328
+#, php-format
+msgid ""
+"Product #%d is a variable/grouped parent with no price of its own. Use "
+"the SKU or ID of a variation."
+msgstr ""
+
+#. translators: %s: cell value
+#: includes/services/class-csv-service.php:341
+#, php-format
+msgid "Invalid regular price \"%s\"."
+msgstr ""
+
+#. translators: %s: cell value
+#: includes/services/class-csv-service.php:350
+#, php-format
+msgid "Invalid sale price \"%s\"."
+msgstr ""
+
+#. translators: %s: cell value
+#: includes/services/class-csv-service.php:359
+#, php-format
+msgid "Invalid sale start date \"%s\" (use YYYY-MM-DD)."
+msgstr ""
+
+#. translators: %s: cell value
+#: includes/services/class-csv-service.php:368
+#, php-format
+msgid "Invalid sale end date \"%s\" (use YYYY-MM-DD)."
+msgstr ""
+
+#: includes/services/class-csv-service.php:373
+msgid "Nothing to change in this row."
+msgstr ""
+
+#: includes/services/class-csv-service.php:384
+msgid "The product has no regular price; provide one."
+msgstr ""
+
+#: includes/services/class-csv-service.php:387
+msgid "The sale price must be lower than the regular price."
+msgstr ""
+
+#: includes/services/class-csv-service.php:390
+#: includes/utilities/class-validator.php:146
+msgid "The sale end date must be after the start date."
+msgstr ""
+
+#. translators: %s: CSV file name
+#: includes/services/class-run-service.php:104
+#, php-format
+msgid "CSV import: %s"
+msgstr ""
+
+#. translators: %s: rounding step, e.g. 100
+#: includes/utilities/class-formatter.php:169
+#, php-format
+msgid "nearest %s"
+msgstr ""
+
+#. translators: %s: rounding step, e.g. 100
+#: includes/utilities/class-formatter.php:172
+#, php-format
+msgid "up to a multiple of %s"
+msgstr ""
+
+#. translators: %s: rounding step, e.g. 100
+#: includes/utilities/class-formatter.php:175
+#, php-format
+msgid "down to a multiple of %s"
+msgstr ""
+
+#. translators: %s: price ending, e.g. .99
+#: includes/utilities/class-formatter.php:178
+#, php-format
+msgid "ending in %s"
+msgstr ""
+
+#. translators: %s: rounding description, e.g. "nearest 100"
+#: includes/utilities/class-formatter.php:206
+#, php-format
+msgid "Rounding: %s"
+msgstr ""
+
+#. translators: %s: category name
+#: includes/utilities/class-formatter.php:213
+#, php-format
+msgid "Category: %s"
+msgstr ""
+
+#: includes/utilities/class-formatter.php:218
+msgid "Only on-sale products"
+msgstr ""
+
+#: includes/utilities/class-validator.php:70
+msgid "Invalid operation type."
+msgstr ""
+
+#: includes/utilities/class-validator.php:81
+msgid "Fill only one of \"Percentage\" or \"Fixed Amount\", not both."
+msgstr ""
+
+#: includes/utilities/class-validator.php:84
+msgid "Enter a percentage or a fixed amount greater than zero."
+msgstr ""
+
+#: includes/utilities/class-validator.php:91
+msgid "Enter a price greater than zero."
+msgstr ""
+
+#: includes/utilities/class-validator.php:112
+msgid "Choose a rounding method for the \"Round Prices Only\" operation."
+msgstr ""
+
+#: includes/utilities/class-validator.php:116
+msgid "Enter a rounding step greater than zero."
+msgstr ""
+
+#: includes/utilities/class-validator.php:121
+msgid "Enter a valid price ending, for example 99, .99 or 900."
+msgstr ""
+
+#: includes/utilities/class-validator.php:133
+msgid "The minimum price cannot be higher than the maximum price."
+msgstr ""
+
+#: includes/utilities/class-validator.php:143
+msgid "Enter valid sale dates."
+msgstr ""
+
+#: includes/utilities/class-validator.php:201
+msgid ""
+"Scheduling needs WooCommerce's Action Scheduler, which is not available."
+msgstr ""
+
+#: includes/utilities/class-validator.php:204
+msgid "Choose the date and time to apply the changes."
+msgstr ""
+
+#: includes/utilities/class-validator.php:207
+msgid "The scheduled time must be in the future."
+msgstr ""
+
+#: includes/utilities/class-validator.php:215
+msgid ""
+"Auto-restore needs WooCommerce's Action Scheduler, which is not available."
+msgstr ""
+
+#: includes/utilities/class-validator.php:219
+msgid "The restore time must be after the time the changes are applied."
+msgstr ""
+
+#. translators: %s: plugin name
+#: index.php:92
+#, php-format
+msgid "%s requires WooCommerce to be installed and activated."
+msgstr ""
+
+#. Plugin Name of the plugin
+#: index.php:93
+msgid "Bulk Price & Discount Editor for WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+#: index.php
+msgid "Professional bulk price and discount management tool for WooCommerce"
 msgstr ""

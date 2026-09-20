@@ -57,13 +57,16 @@ class Bulk_Pricer_Preview_Controller
 
         // Prepare data for views
         $bulk_pricer_currency = get_woocommerce_currency_symbol();
-        $bulk_pricer_operation_type = $operation_data['operation']['operation_type'];
-        $bulk_pricer_change_percent = $operation_data['operation']['change_percent'];
-        $bulk_pricer_change_fixed = $operation_data['operation']['change_fixed'];
-        $bulk_pricer_sync = $operation_data['operation']['sync_sale'];
+        $bulk_pricer_operation = $operation_data['operation'];
+        $bulk_pricer_schedule = $operation_data['schedule'];
+        $bulk_pricer_operation_type = $bulk_pricer_operation['operation_type'];
+        $bulk_pricer_sync = $bulk_pricer_operation['sync_sale'];
 
         // Operation header
         include BULK_PRICER_PLUGIN_DIR . 'admin/views/components/operation-header.php';
+
+        // Summary bar (numbers are filled in by the browser)
+        include BULK_PRICER_PLUGIN_DIR . 'admin/views/components/summary-bar.php';
 
         // Preview table
         include BULK_PRICER_PLUGIN_DIR . 'admin/views/partials/preview-table.php';
@@ -73,11 +76,11 @@ class Bulk_Pricer_Preview_Controller
             include BULK_PRICER_PLUGIN_DIR . 'admin/views/partials/pagination.php';
         }
 
-        // Warning notice
+        // Info notice
         include BULK_PRICER_PLUGIN_DIR . 'admin/views/components/notice-box.php';
 
         // Confirm button
-        echo wp_kses_post($this->render_confirm_button());
+        echo wp_kses_post($this->render_confirm_button($bulk_pricer_schedule['mode'] === 'schedule'));
 
         return ob_get_clean();
     }
@@ -96,8 +99,8 @@ class Bulk_Pricer_Preview_Controller
             <h3>⚠️ <?php echo esc_html__('No products found or invalid input', 'bulk-price-discount-editor-for-woocommerce'); ?></h3>
             <p><b><?php echo esc_html__('Please check the following:', 'bulk-price-discount-editor-for-woocommerce'); ?></b></p>
             <ul>
-                <li><?php echo esc_html__('Only one of "Percentage" or "Fixed Amount" fields should be filled', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
                 <li><?php echo esc_html__('Products exist with your selected filters', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
+                <li><?php echo esc_html__('Operations that use an existing sale price (increase/decrease sale, make permanent, remove discounts) only list products that already have a sale price', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
                 <li><?php echo esc_html__('Input value is greater than zero', 'bulk-price-discount-editor-for-woocommerce'); ?></li>
             </ul>
         </div>
@@ -109,15 +112,20 @@ class Bulk_Pricer_Preview_Controller
      * Render confirm button
      *
      * @since 2.0.0
+     * @param bool $scheduled Whether the changes are scheduled for later
      * @return string HTML output
      */
-    private function render_confirm_button()
+    private function render_confirm_button($scheduled = false)
     {
         ob_start();
         ?>
         <p class="sbp-confirm-wrap">
-            <button id="sbp-confirm-btn" class="button button-primary button-hero">
-                ✅ <?php echo esc_html__('Confirm and Apply', 'bulk-price-discount-editor-for-woocommerce'); ?>
+            <button id="sbp-confirm-btn" class="button button-primary button-hero" data-scheduled="<?php echo $scheduled ? '1' : '0'; ?>">
+                <?php if ($scheduled) : ?>
+                    🗓️ <?php echo esc_html__('Schedule Changes', 'bulk-price-discount-editor-for-woocommerce'); ?>
+                <?php else : ?>
+                    ✅ <?php echo esc_html__('Confirm and Apply', 'bulk-price-discount-editor-for-woocommerce'); ?>
+                <?php endif; ?>
             </button>
         </p>
         <?php

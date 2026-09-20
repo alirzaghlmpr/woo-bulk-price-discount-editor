@@ -50,7 +50,19 @@ class Bulk_Pricer_Product_Data_Formatter
     public function format_price($price)
     {
         $decimals = function_exists('wc_get_price_decimals') ? (int) wc_get_price_decimals() : 0;
-        return number_format((float) $price, $decimals);
+        $price    = (float) $price;
+
+        // Rounding endings (e.g. .99) can produce more decimals than the store
+        // displays; show them instead of hiding the real value.
+        if (abs(round($price, $decimals) - $price) > 0.0000001) {
+            $formatted = number_format($price, 4);
+            $trimmed   = rtrim($formatted, '0');
+            $dot       = strpos($trimmed, '.');
+            $have      = $dot === false ? 0 : strlen($trimmed) - $dot - 1;
+            return $have >= $decimals ? $trimmed : number_format($price, $decimals);
+        }
+
+        return number_format($price, $decimals);
     }
 
     /**
@@ -80,15 +92,10 @@ class Bulk_Pricer_Product_Data_Formatter
      */
     public function calculate_final_price($operation_type, $new_regular, $new_sale)
     {
-        if ($operation_type === 'remove_discount') {
-            return $new_regular;
-        } elseif ($operation_type === 'set_sale') {
-            return $new_sale > 0 ? $new_sale : $new_regular;
-        } elseif ($operation_type === 'increase_reg' || $operation_type === 'decrease_reg') {
-            if ($new_sale > 0 && $new_sale < $new_regular) {
-                return $new_sale;
-            }
-            return $new_regular;
+        // The price a customer pays: the sale price when it's a valid discount,
+        // otherwise the regular price. Same rule for every operation type.
+        if ($new_sale > 0 && $new_sale < $new_regular) {
+            return $new_sale;
         }
 
         return $new_regular;
@@ -108,6 +115,8 @@ class Bulk_Pricer_Product_Data_Formatter
         return array(
             'product_id' => $product->get_id(),
             'name' => $product->get_name(),
+            'sku' => $product->get_sku(),
+            'is_variation' => $product->is_type('variation'),
             'image' => $this->get_product_image($product),
             'is_on_sale' => $price_data['is_on_sale'],
             'current_sale' => $this->format_sale_price($price_data['current_sale'], $price_data['is_on_sale']),
@@ -130,7 +139,8 @@ class Bulk_Pricer_Product_Data_Formatter
             'price_diff_formatted' => $this->format_price($price_data['price_diff']),
             'price_diff_type' => $price_data['price_diff_type'],
             'sync_applied' => $price_data['sync_applied'],
-            'sale_capped' => !empty($price_data['sale_capped'])
+            'sale_capped' => !empty($price_data['sale_capped']),
+            'limited' => !empty($price_data['limited'])
         );
     }
 }

@@ -39,6 +39,9 @@ class Bulk_Pricer_Activator
             wp_die(esc_html__('This plugin requires WooCommerce to be installed and active.', 'bulk-price-discount-editor-for-woocommerce'));
         }
 
+        // Create the change-history tables
+        Bulk_Pricer_DB::install();
+
         // Flush rewrite rules
         flush_rewrite_rules();
     }

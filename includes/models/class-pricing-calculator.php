@@ -53,57 +53,106 @@ class Bulk_Pricer_Pricing_Calculator
     }
 
     /**
-     * Calculate new prices based on operation
+     * Calculate the new prices for a product (raw numbers only)
      *
-     * @since 2.0.0
+     * Single source of truth used by the preview, the summary, the CSV export
+     * and the actual apply, so they can never disagree.
+     *
+     * @since 2.1.0
      * @param WC_Product $product          Product object
      * @param array      $operation_params Operation parameters
-     * @return array|false Price data or false if invalid
+     * @return array|null Result, or null if the parameters are invalid
      */
-    public function calculate_new_prices($product, $operation_params)
+    public function compute_for_product($product, $operation_params)
     {
-        $operation_type = $operation_params['operation_type'];
-        $change_percent = $operation_params['change_percent'];
-        $change_fixed = $operation_params['change_fixed'];
-        $sync_sale = $operation_params['sync_sale'];
+        return $this->compute(
+            (float) $product->get_regular_price('edit'),
+            (float) $product->get_sale_price('edit'),
+            (bool) $product->is_on_sale(),
+            $operation_params
+        );
+    }
 
-        // Get current prices
-        $current_regular = (float) $product->get_regular_price();
-        $current_sale = (float) $product->get_sale_price();
-        $is_on_sale = $product->is_on_sale();
+    /**
+     * Calculate new prices from raw values
+     *
+     * @since 2.1.0
+     * @param float $current_regular Current regular price
+     * @param float $current_sale    Current sale price (0 = none)
+     * @param bool  $is_on_sale      Whether the product is on sale right now
+     * @param array $params          Operation parameters (validated)
+     * @return array|null
+     */
+    public function compute($current_regular, $current_sale, $is_on_sale, $params)
+    {
+        $type    = $params['operation_type'];
+        $percent = isset($params['change_percent']) ? (float) $params['change_percent'] : 0;
+        $fixed   = isset($params['change_fixed']) ? (float) $params['change_fixed'] : 0;
+        $exact   = isset($params['exact_price']) ? (float) $params['exact_price'] : 0;
+        $sync    = !empty($params['sync_sale']);
+        $floor   = isset($params['price_floor']) ? (float) $params['price_floor'] : 0;
+        $ceiling = isset($params['price_ceiling']) ? (float) $params['price_ceiling'] : 0;
 
-        // Initialize new prices
+        // Validation: both percent and fixed cannot be used together
+        $operation = Bulk_Pricer_Operations::get($type);
+        if (!$operation || ($operation['input'] === 'change' && $percent > 0 && $fixed > 0)) {
+            return null;
+        }
+
         $new_regular = $current_regular;
         $new_sale = $current_sale;
         $sync_applied = false;
         $sale_capped = false;
 
-        // Validation: both percent and fixed cannot be used together
-        if ($operation_type !== 'remove_discount' && $change_percent > 0 && $change_fixed > 0) {
-            return false;
-        }
+        // Which prices this operation actually changes. Limits and rounding
+        // only apply to those, never to prices the operation leaves alone.
+        $touch_regular = false;
+        $touch_sale = false;
 
-        // Calculate based on operation type
-        switch ($operation_type) {
+        // A "real" sale price. Sync keys off this rather than is_on_sale(), so
+        // sales scheduled for the future are kept in step as well.
+        $has_sale = $current_sale > 0 && $current_regular > 0 && $current_sale < $current_regular;
+
+        switch ($type) {
             case 'remove_discount':
                 $new_sale = 0;
                 break;
 
             case 'set_sale':
                 if ($current_regular > 0) {
-                    $new_sale = $this->price_calc->calculate_sale_price(
-                        $current_regular,
-                        $change_percent,
-                        $change_fixed
-                    );
+                    $new_sale = $this->price_calc->calculate_sale_price($current_regular, $percent, $fixed);
+                    $touch_sale = true;
 
                     // Detect when the requested discount would meet/exceed the
                     // regular price and was therefore capped to 10% off.
-                    $intended_change = $change_percent > 0
-                        ? $current_regular * ($change_percent / 100)
-                        : $change_fixed;
+                    $intended_change = $percent > 0 ? $current_regular * ($percent / 100) : $fixed;
                     if ($intended_change > 0 && $intended_change >= $current_regular) {
                         $sale_capped = true;
+                    }
+                }
+                break;
+
+            case 'set_sale_exact':
+                if ($current_regular > 0 && $exact > 0) {
+                    $new_sale = $exact;
+                    $touch_sale = true;
+                    if ($new_sale >= $current_regular) {
+                        $new_sale = $this->price_calc->cap_sale_price($current_regular);
+                        $sale_capped = true;
+                    }
+                }
+                break;
+
+            case 'set_regular_exact':
+                if ($exact > 0) {
+                    $new_regular = $exact;
+                    $touch_regular = true;
+
+                    // Keep the same discount percentage on the sale price.
+                    if ($sync && $has_sale) {
+                        $new_sale = $this->price_calc->round_price($new_regular * ($current_sale / $current_regular));
+                        $touch_sale = true;
+                        $sync_applied = true;
                     }
                 }
                 break;
@@ -111,58 +160,155 @@ class Bulk_Pricer_Pricing_Calculator
             case 'increase_reg':
             case 'decrease_reg':
                 if ($current_regular > 0) {
-                    $result = $this->handle_regular_price_change(
-                        $current_regular,
-                        $current_sale,
-                        $operation_type,
-                        $change_percent,
-                        $change_fixed,
-                        $sync_sale,
-                        $is_on_sale
-                    );
-                    $new_regular = $result['new_regular'];
-                    $new_sale = $result['new_sale'];
-                    $sync_applied = $result['sync_applied'];
+                    $new_regular = $this->price_calc->calculate_regular_price($current_regular, $type, $percent, $fixed);
+                    $touch_regular = true;
+
+                    // Sync sale price if enabled and the product has a sale price
+                    if ($sync && $has_sale) {
+                        $new_sale = $this->price_calc->calculate_synced_sale_price(
+                            $current_sale,
+                            $new_regular,
+                            $type,
+                            $percent,
+                            $fixed
+                        );
+                        $touch_sale = true;
+                        $sync_applied = true;
+                    }
                 }
+                break;
+
+            case 'increase_sale':
+            case 'decrease_sale':
+                if ($has_sale) {
+                    $new_sale = $this->price_calc->calculate_adjusted_price(
+                        $current_sale,
+                        $type === 'increase_sale',
+                        $percent,
+                        $fixed
+                    );
+                    $touch_sale = true;
+                }
+                break;
+
+            case 'sale_to_regular':
+                if ($has_sale) {
+                    $new_regular = $current_sale;
+                    $new_sale = 0;
+                    $touch_regular = true;
+                }
+                break;
+
+            case 'round_prices':
+                $touch_regular = $current_regular > 0;
+                $touch_sale = $current_sale > 0;
                 break;
         }
 
-        // Calculate discount percentages
+        // Floor / ceiling guards
+        $limited = false;
+        if ($touch_regular && $new_regular != $current_regular) {
+            list($new_regular, $regular_limited) = $this->price_calc->apply_limits($current_regular, $new_regular, $floor, $ceiling);
+            $limited = $limited || $regular_limited;
+        }
+        if ($touch_sale && $new_sale > 0 && $new_sale != $current_sale) {
+            // A brand-new sale is "lowering" the price from the regular price.
+            $reference = $current_sale > 0 ? $current_sale : $current_regular;
+            list($new_sale, $sale_limited) = $this->price_calc->apply_limits($reference, $new_sale, $floor, $ceiling);
+            $limited = $limited || $sale_limited;
+        }
+
+        // Rounding (only on the prices this operation changed)
+        $round_mode = isset($params['round_mode']) ? $params['round_mode'] : 'none';
+        if ($round_mode !== 'none') {
+            $round_step = isset($params['round_step']) ? $params['round_step'] : 0;
+            $round_ending = isset($params['round_ending']) ? $params['round_ending'] : '';
+
+            if ($touch_regular && $new_regular > 0) {
+                $new_regular = $this->price_calc->apply_rounding($new_regular, $round_mode, $round_step, $round_ending);
+            }
+            if ($touch_sale && $new_sale > 0) {
+                $new_sale = $this->price_calc->apply_rounding($new_sale, $round_mode, $round_step, $round_ending);
+            }
+        }
+
+        // Consistency: a sale price must always stay below the regular price.
+        if ($touch_regular && $new_regular <= 0) {
+            $new_sale = 0;
+        } elseif (($touch_regular || $touch_sale) && $new_sale > 0 && $new_regular > 0 && $new_sale >= $new_regular) {
+            $new_sale = $this->price_calc->cap_sale_price($new_regular);
+            $sale_capped = true;
+        }
+
+        // Discount percentages
         $old_discount_percent = $this->price_calc->calculate_discount_percent($current_regular, $current_sale);
         $new_discount_percent = $this->price_calc->calculate_discount_percent($new_regular, $new_sale);
 
-        // Calculate final display price
-        $final_display_price = $this->formatter->calculate_final_price($operation_type, $new_regular, $new_sale);
+        // Final price a customer pays, before and after
+        $old_final = ($is_on_sale && $current_sale > 0 && $current_sale < $current_regular) ? $current_sale : $current_regular;
+        $new_final = $this->formatter->calculate_final_price($type, $new_regular, $new_sale);
 
-        // Calculate price difference
-        $price_diff_data = $this->calculate_price_difference_for_display(
-            $operation_type,
-            $current_regular,
-            $current_sale,
-            $new_regular,
-            $new_sale,
-            $is_on_sale,
-            $final_display_price
-        );
+        // Price difference for display
+        if (in_array($type, Bulk_Pricer_Operations::regular_diff_types(), true)) {
+            $diff_data = $this->price_calc->calculate_price_difference($current_regular, $new_regular);
+        } else {
+            $diff_data = $this->price_calc->calculate_price_difference($old_final, $new_final);
+        }
 
-        // Get dates for preview
-        $dates = $this->date_handler->get_preview_dates($product, $is_on_sale, $new_sale, $operation_params);
+        $changed = abs($current_regular - $new_regular) > 0.000001 || abs($current_sale - $new_sale) > 0.000001;
 
-        // Build price data
-        $price_data = array(
-            'is_on_sale' => $is_on_sale,
-            'current_sale' => $current_sale,
+        return array(
             'old_regular' => $current_regular,
             'new_regular' => $new_regular,
             'old_sale' => $current_sale,
             'new_sale' => $new_sale,
-            'final_price' => $final_display_price,
+            'old_final' => $old_final,
+            'new_final' => $new_final,
             'old_discount_percent' => $old_discount_percent,
             'new_discount_percent' => $new_discount_percent,
-            'price_diff' => $price_diff_data['price_diff'],
-            'price_diff_type' => $price_diff_data['price_diff_type'],
+            'price_diff' => $diff_data['amount'],
+            'price_diff_type' => $diff_data['type'],
             'sync_applied' => $sync_applied,
-            'sale_capped' => $sale_capped
+            'sale_capped' => $sale_capped,
+            'limited' => $limited,
+            'changed' => $changed,
+            'is_on_sale' => $is_on_sale,
+        );
+    }
+
+    /**
+     * Calculate new prices based on operation (preview row)
+     *
+     * @since 2.0.0
+     * @param WC_Product $product          Product object
+     * @param array      $operation_params Operation parameters
+     * @return array|false Preview data or false if invalid
+     */
+    public function calculate_new_prices($product, $operation_params)
+    {
+        $result = $this->compute_for_product($product, $operation_params);
+        if (!$result) {
+            return false;
+        }
+
+        // Get dates for preview
+        $dates = $this->date_handler->get_preview_dates($product, $result['new_sale'], $operation_params);
+
+        $price_data = array(
+            'is_on_sale' => $result['is_on_sale'],
+            'current_sale' => $result['old_sale'],
+            'old_regular' => $result['old_regular'],
+            'new_regular' => $result['new_regular'],
+            'old_sale' => $result['old_sale'],
+            'new_sale' => $result['new_sale'],
+            'final_price' => $result['new_final'],
+            'old_discount_percent' => $result['old_discount_percent'],
+            'new_discount_percent' => $result['new_discount_percent'],
+            'price_diff' => $result['price_diff'],
+            'price_diff_type' => $result['price_diff_type'],
+            'sync_applied' => $result['sync_applied'],
+            'sale_capped' => $result['sale_capped'],
+            'limited' => $result['limited'],
         );
 
         // Return formatted preview data
@@ -170,78 +316,17 @@ class Bulk_Pricer_Pricing_Calculator
     }
 
     /**
-     * Handle regular price change with optional sale price sync
+     * Calculate the lightweight numbers used by the summary bar and CSV export
      *
-     * @since 2.0.0
-     * @param float  $regular      Current regular price
-     * @param float  $sale         Current sale price
-     * @param string $type         Operation type
-     * @param float  $percent      Percentage change
-     * @param float  $fixed        Fixed amount change
-     * @param bool   $sync         Whether to sync sale price
-     * @param bool   $is_on_sale   Whether product is on sale
-     * @return array New prices and sync status
+     * @since 2.1.0
+     * @param WC_Product $product          Product object
+     * @param array      $operation_params Operation parameters
+     * @return array|false
      */
-    private function handle_regular_price_change($regular, $sale, $type, $percent, $fixed, $sync, $is_on_sale)
+    public function calculate_summary($product, $operation_params)
     {
-        // Calculate new regular price
-        $new_regular = $this->price_calc->calculate_regular_price($regular, $type, $percent, $fixed);
-        $new_sale = $sale;
-        $sync_applied = false;
+        $result = $this->compute_for_product($product, $operation_params);
 
-        // Sync sale price if enabled and product is on sale
-        if ($sync && $is_on_sale && $sale > 0) {
-            $new_sale = $this->price_calc->calculate_synced_sale_price(
-                $sale,
-                $new_regular,
-                $type,
-                $percent,
-                $fixed
-            );
-            $sync_applied = true;
-        }
-
-        return array(
-            'new_regular' => $new_regular,
-            'new_sale' => $new_sale,
-            'sync_applied' => $sync_applied
-        );
-    }
-
-    /**
-     * Calculate price difference for display
-     *
-     * @since 2.0.0
-     * @param string $operation_type     Operation type
-     * @param float  $old_regular        Old regular price
-     * @param float  $old_sale           Old sale price
-     * @param float  $new_regular        New regular price
-     * @param float  $new_sale           New sale price
-     * @param bool   $is_on_sale         Whether product is on sale
-     * @param float  $final_display_price Final display price
-     * @return array Price difference data
-     */
-    private function calculate_price_difference_for_display($operation_type, $old_regular, $old_sale, $new_regular, $new_sale, $is_on_sale, $final_display_price)
-    {
-        $price_diff = 0;
-
-        if ($operation_type === 'set_sale' || $operation_type === 'remove_discount') {
-            $old_final = $is_on_sale && $old_sale > 0 ? $old_sale : $old_regular;
-            $price_diff = $final_display_price - $old_final;
-        } else {
-            $price_diff = $new_regular - $old_regular;
-        }
-
-        $diff_data = $this->price_calc->calculate_price_difference($old_regular, $new_regular);
-
-        if ($operation_type === 'set_sale' || $operation_type === 'remove_discount') {
-            $old_final = $is_on_sale && $old_sale > 0 ? $old_sale : $old_regular;
-            $diff_data = $this->price_calc->calculate_price_difference($old_final, $final_display_price);
-        }
-
-        return array(
-            'price_diff' => $diff_data['amount'],
-            'price_diff_type' => $diff_data['type']
-        );
+        return $result ? $result : false;
     }
 }
