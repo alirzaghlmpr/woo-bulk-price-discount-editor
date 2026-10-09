@@ -1,535 +1,288 @@
-# 🏷️ Bulk Price & Discount Editor for WooCommerce
+<div align="center">
 
-> **The most powerful and user-friendly WooCommerce price management solution**
+<img src="assets/images/icon-256.png" alt="Bulk Price & Discount Editor logo" width="150" height="150">
 
-A professional WordPress plugin for managing WooCommerce product prices and discounts in bulk. Built with modern architecture, full translation support, and an intuitive interface that makes complex pricing operations simple.
+# Bulk Price & Discount Editor for WooCommerce
 
-[![WordPress](https://img.shields.io/badge/WordPress-5.0+-blue.svg)](https://wordpress.org/)
-[![WooCommerce](https://img.shields.io/badge/WooCommerce-9.5+-purple.svg)](https://woocommerce.com/)
-[![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4.svg)](https://php.net/)
-[![License](https://img.shields.io/badge/License-GPL--2.0-green.svg)](LICENSE)
-[![HPOS Compatible](https://img.shields.io/badge/HPOS-Compatible-brightgreen.svg)](https://woocommerce.com/document/high-performance-order-storage/)
+**Preview, apply, schedule and undo price changes across your whole catalog — in a few clicks.**
+
+[![Version](https://img.shields.io/badge/version-2.1.0-2563eb?style=for-the-badge)](#-changelog)
+[![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white)](https://wordpress.org/)
+[![WooCommerce](https://img.shields.io/badge/WooCommerce-6.0%E2%80%939.5-7f54b3?style=for-the-badge&logo=woocommerce&logoColor=white)](https://woocommerce.com/)
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white)](https://php.net/)
+[![License](https://img.shields.io/badge/license-GPL--2.0%2B-16a34a?style=for-the-badge)](#-license)
+[![HPOS](https://img.shields.io/badge/HPOS-compatible-16a34a?style=for-the-badge)](https://woocommerce.com/document/high-performance-order-storage/)
+
+[Features](#-features) · [Screenshots](#-screenshots) · [Installation](#-installation) · [Usage](#-usage) · [CSV import](#-csv-import) · [Developers](#-for-developers) · [FAQ](#-faq)
+
+</div>
 
 ---
 
-## ✨ Features
+## ✨ Why this plugin?
 
-### 🎯 Core Functionality
-- **Bulk Price Operations**: Increase, decrease, or set sale prices for hundreds of products at once
-- **Multiple Calculation Methods**: Choose between percentage-based or fixed amount changes
-- **Live Preview**: See all changes before applying them - no surprises!
-- **Smart Filtering**: Target products by category or sale status
-- **Selective Application**: Remove specific products from the preview before applying changes
-- **Sale Price Sync**: Automatically maintain discount percentages when changing regular prices
+Changing prices one product at a time doesn't scale — and changing them blindly is risky. This plugin lets you **see exactly what will change before anything is touched**, applies it in safe batches that never time out, and records every run so you can **undo it later**.
 
-### 💰 Price Operations
-- ⬆️ **Increase Regular Price**: Boost product prices by percentage or fixed amount
-- ⬇️ **Decrease Regular Price**: Reduce prices across multiple products
-- 🏷️ **Apply/Update Sale Price**: Set discounts with optional start and end dates
-- ❌ **Remove All Discounts**: Clear sale prices from products in bulk
-- 🎯 **Exact Prices**: Set every selected product's regular or sale price to one exact value
-- 🔼🔽 **Sale Price Only**: Raise or lower just the sale price by percentage or fixed amount
-- 📌 **Make Sale Permanent**: Turn the sale price into the regular price and clear the sale
-- 🔢 **Round Prices Only**: Apply rounding without changing prices otherwise
-- 🔄 **Synchronization**: Keep discount percentages constant when regular prices change
+| | |
+|---|---|
+| 🔍 **Preview first** | Before → after prices, discount %, and a whole-catalog impact summary |
+| 🛡️ **Always reversible** | Every run is logged per product and can be reverted from the History tab |
+| 🗓️ **Time-based campaigns** | Schedule a change for later and auto-restore the original prices afterwards |
+| ⚡ **Built for big stores** | Batch processing with a live progress bar — no PHP timeouts |
 
-### 🛡️ Safety & Automation (2.1.0)
-- ↩️ **Undo & History**: Every run is recorded with old/new prices per product and can be reverted from the *History* tab (kept 90 days; adjust with the `bulk_pricer_history_retention_days` filter)
-- 🗓️ **Scheduling & Auto-Restore**: Apply changes at a future date/time and automatically put the original prices back later (runs through WooCommerce's bundled Action Scheduler)
-- 🔢 **Price Rounding**: Round to the nearest / up / down to a multiple (e.g. 1000) or use charm endings (`.99`, `99`, `900`)
-- ⛔ **Price Limits**: Never lower a price below, or raise it above, a value you choose
-- 📊 **Whole-catalog Summary**: Products that will change, increases vs. decreases and the net price impact — recalculated live as you remove rows
-- ⬇️ **CSV Export**: Download the complete preview (not just the visible page)
-- 📤 **CSV Import**: Update prices per SKU/ID from a file, with preview, confirmation and undo
-- 🧩 **Variable Products**: Variations are edited individually and the parent product's price range is refreshed automatically
+---
 
-### 🎨 User Experience
-- **Intuitive Interface**: Clean, modern design with visual feedback
-- **Real-time Validation**: Instant feedback on input errors
-- **Product Images**: Visual confirmation with product thumbnails
-- **Detailed Preview**: See before/after prices, discount percentages, and price differences
-- **Progress Tracking**: Live status updates during batch operations
-- **Responsive Design**: Works perfectly on all devices
+## 🎯 Features
 
-### 🌍 Internationalization
-- **Full Translation Support**: Built with WordPress i18n best practices
-- **English & Persian**: Complete translations included
-- **RTL Ready**: Perfect support for right-to-left languages
-- **Extensible**: Easy to add new language translations
+### 💰 Price operations
 
-### ⚙️ Technical Excellence
-- **HPOS Compatible**: Full support for WooCommerce High-Performance Order Storage
-- **Modular Architecture**: Clean, maintainable code following SOLID principles
-- **Batch Processing**: Handle thousands of products without timeouts
-- **Precision Handling**: No floating-point errors with Iranian Rial or similar currencies
-- **AJAX-Powered**: Smooth, async operations without page reloads
-- **Secure**: Nonce verification, capability checks, and input sanitization
+| Operation | What it does |
+|---|---|
+| ⬆️ Increase regular price | By a percentage or a fixed amount |
+| ⬇️ Decrease regular price | By a percentage or a fixed amount |
+| 🏷️ Apply / update sale price | Optional sale start and end dates |
+| ❌ Remove all discounts | Clear sale prices in bulk |
+| 🎯 Exact price | Set regular or sale price to one exact value |
+| 🔼🔽 Sale price only | Raise or lower just the sale price |
+| 📌 Make sale permanent | Sale price becomes the regular price |
+| 🔢 Round prices only | Apply rounding without changing prices otherwise |
+
+### 🛡️ Safety & automation
+
+- **↩️ Undo & history** – old/new price per product, one-click revert, resume interrupted runs, CSV download of any run (kept 90 days)
+- **🗓️ Scheduling & auto-restore** – run at a future date/time and put the original prices back automatically (uses WooCommerce's bundled Action Scheduler)
+- **🔢 Price rounding** – nearest / up / down to a multiple (e.g. `1000`) or charm endings (`.99`, `99`, `900`)
+- **⛔ Price limits** – never go below a floor or above a ceiling
+- **🔄 Sale sync** – keep discount percentages constant when regular prices change
+- **📊 Live summary** – products that change, increases vs. decreases and net price impact, recalculated as you exclude rows
+- **🧩 Variable products** – variations are edited individually and the parent's price range is refreshed
+- **🎛️ Smart targeting** – filter by category or "only products on sale", and exclude individual rows from the preview
+
+### 📤 Import / export
+
+- **CSV import** by SKU or product ID — with preview, confirmation and undo
+- **CSV export** of the complete preview, not just the visible page
+
+### 🎨 Experience
+
+- Modern, responsive admin UI with a clean tab layout
+- AJAX-powered — no page reloads
+- Full **RTL** support and **English + Persian** translations included
+- HPOS compatible · secure by design (nonces, capability checks, sanitized input)
 
 ---
 
 ## 📸 Screenshots
 
-### Main Interface
-![Main Interface](screenshots/main-interface.png)
-*Clean, intuitive form with all options at your fingertips*
-
-### Live Preview
-![Live Preview](screenshots/preview.png)
-*See exactly what will change before you commit*
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/main-interface.png" alt="Main interface"><br>
+      <sub><b>Editor</b> — pick an operation, set the amount and options</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/preview.png" alt="Live preview"><br>
+      <sub><b>Preview</b> — see every change before you commit</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## 🚀 Installation
 
-### Requirements
-- **WordPress**: 5.0 or higher
-- **WooCommerce**: 9.5 or higher (HPOS compatible)
-- **PHP**: 7.4 or higher
-- **MySQL**: 5.6 or higher
+**Requirements:** WordPress 5.8+ · WooCommerce 6.0+ (tested up to 9.5) · PHP 7.4+
 
-### Quick Install
-
-1. **Download the Plugin**
+1. Download or clone this repository
    ```bash
-   git clone https://github.com/yourusername/woocommerce-bulk-price-editor.git
+   git clone https://github.com/alirzaghlmpr/woo-bulk-price-discount-editor-for-woocommerce.git
    ```
-
-2. **Upload to WordPress**
-   - Upload the plugin folder to `/wp-content/plugins/`
-   - Or upload via WordPress admin: `Plugins > Add New > Upload Plugin`
-
-3. **Activate**
-   - Go to `Plugins > Installed Plugins`
-   - Find "Bulk Price & Discount Editor for WooCommerce"
-   - Click "Activate"
-
-4. **Access the Plugin**
-   - Navigate to `Bulk Price Editor` in the WordPress admin menu
-   - Start managing your prices!
+2. Copy the folder to `/wp-content/plugins/` (or upload the ZIP via **Plugins → Add New → Upload Plugin**)
+3. Activate **Bulk Price & Discount Editor for WooCommerce**
+4. Open **Bulk Price Editor** in the admin menu
 
 ---
 
-## 📖 Usage Guide
+## 📖 Usage
 
-### Basic Workflow
+### 1️⃣ Choose an operation
+Pick what you want to do from the grouped dropdown — increase, decrease, set a sale, set exact prices, round, and more.
 
-#### 1. Choose Your Operation
-Select from four powerful operation types:
-- **⬆️ Increase Regular Price**: Add to existing prices
-- **⬇️ Decrease Regular Price**: Reduce existing prices
-- **🏷️ Apply/Update Sale Price**: Set discount prices
-- **❌ Remove All Discounts**: Clear all sale prices
+### 2️⃣ Set the amount
+Fill **one** of *Percentage (%)* or *Fixed Amount*. If both are filled, nothing is changed.
 
-#### 2. Set Change Amount
-Choose **ONE** of these methods:
-- **📊 Percentage (%)**: Change prices by a percentage (e.g., 10% increase)
-- **💰 Fixed Amount**: Change prices by a fixed value (e.g., 5000 Rial)
+### 3️⃣ Fine-tune
+| Option | Effect |
+|---|---|
+| 🎯 **Product filter** | Process only products currently on sale |
+| 🔄 **Sync sale price** | Keep the discount % constant when the regular price changes |
+| 🗂️ **Category** | Limit the change to one category |
+| 🔢 **Rounding** | Round to a multiple or force a price ending |
+| ⛔ **Price limits** | Floor and ceiling the change can never cross |
+| 🗓️ **Schedule / auto-restore** | Apply later, and optionally restore the original prices at a set time |
 
-> ⚠️ **Important**: Only fill ONE field. If both are filled, no changes will be applied.
+> 💡 **Sync example:** a product has a 20 % discount and you raise the regular price by 10 %. With sync **on** the sale price rises too and the discount stays 20 %; with sync **off** the sale price stays put and the discount shrinks.
 
-#### 3. Configure Advanced Options
+### 4️⃣ Preview
+Click **Preview & Review Changes** to see before → after prices, discount %, dates and the overall impact. Remove any row with **×** to exclude that product.
 
-**🎯 Product Filter**
-- ✅ Enable to process only products currently on sale
-- ⬜ Disable to process all products (default)
+### 5️⃣ Apply (or schedule)
+Click **Confirm and Apply**. Progress is shown live; if a run is ever interrupted, resume or revert it from **History**.
 
-**🔄 Sync Sale Price**
-- ✅ Enable to maintain discount percentages (default)
-- ⬜ Disable to keep sale prices unchanged when regular prices change
-
-**Example**: If a product has 20% discount and you increase regular price by 10%:
-- **Sync ON**: Sale price also increases to maintain 20% discount
-- **Sync OFF**: Sale price stays the same (discount % changes)
-
-#### 4. Apply Filters (Optional)
-- **🗂️ Category**: Select a specific category or "All Categories"
-- **📅 Sale Start Date**: Set when the sale should begin (for sale price operations)
-- **📅 Sale End Date**: Set when the sale should end (for sale price operations)
-
-#### 5. Preview & Review Changes
-1. Click **🔍 Preview & Review Changes**
-2. Review the preview table showing:
-   - Product images and names
-   - Current status (On Sale / Regular)
-   - Before → After prices
-   - Discount percentages
-   - Sale dates
-   - Price differences
-   - Final prices
-
-3. **Remove unwanted products**: Click the ❌ button next to any product you want to exclude
-
-#### 6. Apply Changes
-1. Click **✅ Confirm and Apply**
-2. Confirm the action in the popup dialog
-3. Wait for batch processing to complete
-4. Refresh the page to see updated products
+### ↩️ Undo
+Open the **History** tab, find the run and press **Revert**. Each product returns to the prices it had before that run.
 
 ---
 
-## 🏗️ Technical Architecture
+## 📤 CSV import
 
-### File Structure
+Upload a CSV from the **Import CSV** tab. Comma, semicolon and tab separated files are accepted.
+
+| Column | Meaning |
+|---|---|
+| `sku` / `id` | **Required.** Identifies the product (for variations, use the variation's SKU/ID) |
+| `regular_price` | New regular price — leave empty to keep the current one |
+| `sale_price` | New sale price — `0` removes the sale, empty keeps it |
+| `sale_start` / `sale_end` | Optional dates as `YYYY-MM-DD` (site timezone) |
+
+```csv
+sku,regular_price,sale_price
+TSHIRT-BLUE,29.90,24.90
+MUG-WHITE,12,0
 ```
-bulk-price-discount-editor-for-woocommerce/
-├── admin/
-│   ├── class-admin-assets.php      # Asset management
-│   ├── class-admin-menu.php        # Menu registration
-│   └── views/
-│       ├── admin-page.php          # Main admin page
-│       ├── components/             # Reusable UI components
-│       │   ├── operation-header.php
-│       │   └── notice-box.php
-│       └── partials/               # Template partials
-│           ├── form-fields.php
-│           ├── preview-table.php
-│           └── pagination.php
+
+You always get a preview and a confirmation step, and the import is recorded in History so it can be undone.
+
+---
+
+## 🧑‍💻 For developers
+
+### Filters
+
+| Filter | Default | Purpose |
+|---|---|---|
+| `bulk_pricer_capability` | `manage_options` | Capability required to use the plugin |
+| `bulk_pricer_batch_size` | `20` | Products processed per apply/revert request |
+| `bulk_pricer_summary_chunk` | `100` | Products per request when computing the summary |
+| `bulk_pricer_history_retention_days` | `90` | How long finished runs are kept |
+| `bulk_pricer_variable_types` | `variable`, `variable-subscription` | Product types treated as variable |
+
+```php
+// Let shop managers use the plugin
+add_filter('bulk_pricer_capability', fn() => 'manage_woocommerce');
+
+// Keep history for a year
+add_filter('bulk_pricer_history_retention_days', fn() => 365);
+```
+
+### Project structure
+
+```
+├── admin/                  # Menu, assets and views (tabs, partials, components)
 ├── assets/
-│   ├── css/
-│   │   └── bulk-pricer-admin.css   # Admin styles
-│   └── js/
-│       └── bulk-pricer-admin.js    # AJAX & UI interactions
+│   ├── css/                # Admin styles (design tokens, RTL-safe)
+│   ├── images/             # Plugin icon & menu icon
+│   └── js/                 # AJAX & UI interactions
 ├── includes/
-│   ├── controllers/                # Request handlers
-│   │   ├── class-ajax-controller.php
-│   │   └── class-preview-controller.php
-│   ├── models/                     # Business logic
-│   │   ├── class-pricing-calculator.php
-│   │   ├── class-product-model.php
-│   │   ├── calculators/
-│   │   │   └── class-price-calculator.php
-│   │   ├── formatters/
-│   │   │   └── class-product-data-formatter.php
-│   │   └── handlers/
-│   │       └── class-date-handler.php
-│   └── utilities/                  # Helper classes
-│       └── class-formatter.php
-├── languages/                      # Translation files
-│   ├── bulk-price-discount-editor-for-woocommerce.pot
-│   ├── bulk-price-discount-editor-for-woocommerce-en_US.po
-│   ├── bulk-price-discount-editor-for-woocommerce-en_US.mo
-│   ├── bulk-price-discount-editor-for-woocommerce-fa_IR.po
-│   ├── bulk-price-discount-editor-for-woocommerce-fa_IR.mo
-│   └── compile-mo.php             # MO compiler script
-├── index.php                       # Plugin bootstrap
-└── README.md                       # This file
+│   ├── controllers/        # AJAX, preview, CSV and history handlers
+│   ├── models/             # Operations, products, runs, calculators, formatters
+│   ├── services/           # Run processing, CSV, scheduler (Action Scheduler)
+│   └── utilities/          # Formatter, validator
+├── languages/              # .pot / .po / .mo (en_US, fa_IR)
+└── index.php               # Plugin bootstrap
 ```
 
-### Design Patterns
-
-#### MVC Architecture
-- **Models**: Business logic and data manipulation
-- **Views**: Template files for UI rendering
-- **Controllers**: Request handling and orchestration
-
-#### Single Responsibility Principle
-Each class has one clear purpose:
-- `Bulk_Pricer_Price_Calculator`: Mathematical price calculations
-- `Bulk_Pricer_Product_Data_Formatter`: Data formatting and presentation
-- `Bulk_Pricer_Date_Handler`: Date operations and formatting
-- `Bulk_Pricer_Formatter`: General formatting utilities
-
-#### Dependency Injection
-Clean, testable code with explicit dependencies:
-```php
-public function __construct() {
-    $this->price_calc = new Bulk_Pricer_Price_Calculator();
-    $this->date_handler = new Bulk_Pricer_Date_Handler();
-    $this->formatter = new Bulk_Pricer_Product_Data_Formatter();
-}
-```
-
-### Key Technical Features
-
-#### Precision Handling
-Eliminates floating-point errors common with large numbers:
-```php
-// Before: 21,676,000 - 1,000,000 = 20,676,001 ❌
-// After: Perfect calculation = 20,676,000 ✅
-$new_price = (int) round($price, 0, PHP_ROUND_HALF_DOWN);
-```
-
-#### Batch Processing
-Handles unlimited products without PHP timeout:
-- Processes 20 products per batch
-- AJAX-based pagination
-- Progress tracking with visual feedback
-
-#### Security
-- Nonce verification on all AJAX requests
-- Capability checks (`manage_options`)
-- Input sanitization and validation
-- Prevents direct file access
-
-#### Translation System
-WordPress-native i18n implementation:
-```php
-// PHP templates
-echo esc_html__('Product Name', 'bulk-price-discount-editor-for-woocommerce');
-
-// JavaScript localization
-wp_localize_script('bulk-pricer-admin-js', 'sbp_vars', array(
-    'i18n' => array(
-        'loading_preview' => __('Loading preview page', 'bulk-price-discount-editor-for-woocommerce')
-    )
-));
-```
+### Notes on precision
+Prices are calculated with whole-number-safe arithmetic to avoid floating-point drift on large amounts (e.g. Iranian Rial).
 
 ---
 
-## 🌍 Translation
+## 🌍 Translations
 
-### Included Languages
-- 🇬🇧 **English** (en_US) - Default
-- 🇮🇷 **Persian/Farsi** (fa_IR) - Complete translation
+Included: 🇬🇧 English and 🇮🇷 Persian (فارسی), with full RTL support.
 
-### Adding New Languages
-
-1. **Generate POT Template**
-   ```bash
-   wp i18n make-pot . languages/bulk-price-discount-editor-for-woocommerce.pot
-   ```
-
-2. **Create Language Files**
-   - Copy `bulk-price-discount-editor-for-woocommerce.pot` to `bulk-price-discount-editor-for-woocommerce-{locale}.po`
-   - Translate all strings
-   - Example: `bulk-price-discount-editor-for-woocommerce-fr_FR.po` for French
-
-3. **Compile MO Files**
-   ```bash
-   cd languages/
-   php compile-mo.php
-   ```
-
-4. **Activate in WordPress**
-   - Go to `Settings > General`
-   - Select your language
-   - Deactivate and reactivate the plugin
-
-### Translation Files
-- **POT**: Template file with all translatable strings
-- **PO**: Human-readable translation source files
-- **MO**: Compiled binary files used by WordPress
+To add a language, copy `languages/bulk-price-discount-editor-for-woocommerce.pot` to `…-{locale}.po`, translate it, then run `cd languages && php compile-mo.php` (or `languages/compile-translations.bat` on Windows) to build the `.mo` file.
 
 ---
 
-## 🔧 Configuration
+## ❓ FAQ
 
-### WooCommerce Settings
-The plugin automatically detects:
-- Currency symbol from WooCommerce settings
-- Product categories
-- HPOS (High-Performance Order Storage) status
+<details>
+<summary><b>"WooCommerce is required" notice</b></summary>
+Install and activate WooCommerce first, then activate this plugin.
+</details>
 
-### Advanced Configuration
-For developers, you can hook into plugin operations:
+<details>
+<summary><b>Nothing changes when I apply</b></summary>
+Make sure only <i>one</i> of Percentage / Fixed Amount is filled, that it is greater than 0, and that your category/filter actually matches products.
+</details>
 
-```php
-// Before price changes are applied
-add_action('sbp_before_price_update', function($product_id, $old_price, $new_price) {
-    // Your custom logic
-}, 10, 3);
+<details>
+<summary><b>My scheduled change didn't run on time</b></summary>
+Scheduling uses WooCommerce's Action Scheduler, which needs site visits or a real server cron to fire. Overdue runs are flagged in History, where you can press <b>Run now</b>.
+</details>
 
-// After price changes are applied
-add_action('sbp_after_price_update', function($product_id, $new_price) {
-    // Your custom logic
-}, 10, 2);
-```
+<details>
+<summary><b>Does it work with variable products?</b></summary>
+Yes. Variations are edited individually and the parent product's price range is refreshed afterwards.
+</details>
 
----
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### "WooCommerce is Required" Notice
-**Solution**: Install and activate WooCommerce before activating this plugin.
-
-#### Translations Not Working
-**Solution**:
-1. Go to `Settings > General`
-2. Set correct language (e.g., فارسی for Persian)
-3. Deactivate and reactivate the plugin
-4. Clear browser cache
-
-#### Price Changes Not Applying
-**Checks**:
-- Only ONE of "Percentage" or "Fixed Amount" should be filled
-- Value must be greater than 0
-- Products must exist in selected category/filters
-
-#### Timeout Errors
-**Solution**: The plugin uses batch processing to prevent timeouts. If you still experience issues:
-- Increase PHP `max_execution_time` in php.ini
-- Contact your hosting provider
-
----
-
-## 📊 Performance
-
-### Benchmarks
-- **Small Store** (100-500 products): < 2 seconds
-- **Medium Store** (500-2,000 products): 5-15 seconds
-- **Large Store** (2,000-10,000 products): 20-60 seconds
-- **Enterprise** (10,000+ products): Scales linearly with batch processing
-
-### Optimization Tips
-- Use category filters to target specific products
-- Process during off-peak hours for large operations
-- Enable object caching (Redis/Memcached) for better performance
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-### Reporting Bugs
-1. Check existing issues first
-2. Create a detailed bug report with:
-   - WordPress version
-   - WooCommerce version
-   - PHP version
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - Screenshots if applicable
-
-### Suggesting Features
-1. Open an issue with the `enhancement` label
-2. Describe the feature and use case
-3. Explain why it would be valuable
-
-### Code Contributions
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Follow WordPress coding standards
-4. Write clear commit messages
-5. Test thoroughly
-6. Submit a pull request
-
-### Translation Contributions
-1. Create a new language PO file
-2. Translate all strings
-3. Test in WordPress
-4. Submit via pull request
+<details>
+<summary><b>Can I undo a change?</b></summary>
+Yes — every run is recorded. Revert it from the History tab within the retention period (90 days by default).
+</details>
 
 ---
 
 ## 📜 Changelog
 
-### Version 2.1.0
-#### ✨ New
+### 2.1.0
+**✨ New**
 - Undo & change history (per-product old/new prices, resume interrupted runs, CSV download of a run)
 - Scheduled apply and auto-restore via Action Scheduler
-- Price rounding (nearest/up/down multiples, charm endings), price floor/ceiling
-- New operations: exact regular/sale price, increase/decrease sale price only, make sale permanent, round prices only
+- Price rounding (nearest/up/down multiples, charm endings) and price floor/ceiling
+- New operations: exact regular/sale price, sale-only increase/decrease, make sale permanent, round prices only
 - Whole-catalog preview summary, CSV export of the preview, CSV import by SKU/ID
 - Progress bar while applying
+- 🎨 Redesigned admin UI and new plugin icon
 
-#### 🐛 Fixed
-- Variable products: the parent product's stored price and cached variation prices are now refreshed after variations change
-- "Only on sale" now edits only the variations that are on sale (previously every variation of a variable product with any variation on sale)
-- Sale dates from the form were applied to *every* operation (e.g. overwriting schedules on "Increase regular price"); they now only apply to operations that create a sale
-- Sale dates were parsed as UTC and could shift by a day; they now use the site timezone, and the sale end date includes the whole day
+**🐛 Fixed**
+- Variable products: parent price and cached variation prices refresh after variations change
+- "Only on sale" now edits only the variations that are on sale
+- Sale dates now apply only to operations that create a sale, use the site timezone, and the end date covers the whole day
 - Sale sync now also covers sales scheduled for the future
-- Preview pages hold exactly 20 rows and the total counts variations (previously a page could hold hundreds of rows)
-- Much faster collection of matching products on large catalogs
-- Decimal amounts can be entered in the fixed amount field
-- Untranslated/incorrect plugin name in the "WooCommerce required" notice
+- Preview pages hold exactly 20 rows and the total counts variations
+- Much faster product collection on large catalogs
+- Decimal amounts accepted in the fixed amount field
 
-### Version 2.0.0 (2025-01-01)
-#### 🎉 Major Release - Complete Rewrite
+### 2.0.0
+Complete rewrite: live preview, product images, sale dates, row exclusion, sale sync, batch processing, English & Persian translations, HPOS compatibility.
 
-**Added**
-- ✨ Live preview before applying changes
-- 🖼️ Product images in preview table
-- 📅 Sale start and end date support
-- ❌ Ability to remove products from preview
-- 🔄 Sale price synchronization option
-- 🌍 Full translation support (English & Persian)
-- 🎯 Filter by product sale status
-- 📊 Detailed price change information
-- ⚡ Batch processing for large stores
-- 🎨 Modern, intuitive UI
+### 1.0.0
+Initial release.
 
-**Changed**
-- 🏗️ Complete architectural refactor (MVC pattern)
-- 🔧 Separated concerns into specialized classes
-- 💾 Improved database queries
-- 🚀 Enhanced performance for large catalogs
-- 📱 Responsive design improvements
+---
 
-**Fixed**
-- 🐛 Floating-point precision errors with large numbers
-- 🔌 WooCommerce loading order issues
-- 🌐 Translation system fully functional
-- 🔒 Enhanced security with nonce verification
-- ⚡ PHP timeout issues with bulk operations
+## 🤝 Contributing
 
-**Technical**
-- ✅ HPOS (High-Performance Order Storage) compatibility
-- ✅ WordPress 6.4+ tested
-- ✅ WooCommerce 9.5+ tested
-- ✅ PHP 8.2 compatible
-- ✅ Follows WordPress coding standards
+Bug reports, ideas and pull requests are welcome.
 
-### Version 1.0.0
-- Initial release
-- Basic bulk price editing functionality
+1. Fork the repo and create a branch (`git checkout -b feature/my-feature`)
+2. Follow the WordPress coding standards and test thoroughly
+3. Open a pull request describing the change
+
+When reporting a bug, please include your WordPress, WooCommerce and PHP versions, steps to reproduce, and screenshots if relevant.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **GNU General Public License v2.0**
-**What this means:**
-- ✅ You can use this plugin commercially
-- ✅ You can modify the plugin
-- ✅ You can distribute the plugin
-- ✅ You must disclose source code changes
-- ✅ You must use the same license for derivatives
-
----
+Released under the **GNU General Public License v2.0 or later** — see the [license text](https://www.gnu.org/licenses/gpl-2.0.html).
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@alirzaghlmpr](https://github.com/alirzaghlmpr)
-- Website: [webioo.ir](https://webioo.ir)
-- Email: alirzaghlmpr@gmail.com
-
----
-
-## 🙏 Acknowledgments
-
-- Thanks to the WordPress community for excellent documentation
-- WooCommerce team for their extensible architecture
-- All contributors who help improve this plugin
-- Users who provide valuable feedback
-
----
-
-## 💬 Support
-
-### Documentation
-- [Installation Guide](#-installation)
-- [Usage Guide](#-usage-guide)
-- [Troubleshooting](#-troubleshooting)
-
-### Professional Support
-Need custom development or priority support?
-- Contact: alirzaghlmpr@gmail.com
-- Response time: Within 24 hours
-
----
-
-## ⭐ Show Your Support
-
-If this plugin helped you, please:
-- ⭐ Star this repository
-- 🐦 Share on social media
-- 📝 Write a review
-- 🤝 Contribute to the project
+**Alireza Gholampour**
+[GitHub](https://github.com/alirzaghlmpr) · [LinkedIn](https://www.linkedin.com/in/alireza-gholampour-6a0541211) · [webioo.ir](https://webioo.ir) · alirzaghlmpr@gmail.com
 
 ---
 
@@ -537,6 +290,6 @@ If this plugin helped you, please:
 
 **Made with ❤️ for the WordPress & WooCommerce community**
 
-[⬆ Back to Top](#️-woocommerce-bulk-price--discount-editor-pro)
+⭐ If this plugin saves you time, consider starring the repo!
 
 </div>

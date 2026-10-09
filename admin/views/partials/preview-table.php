@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
         <thead>
             <tr>
                 <th style="width: 30px;"></th>
-                <th style="width: 50px;"><?php echo esc_html__('Image', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
+                <th style="width: 64px;"><?php echo esc_html__('Image', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
                 <th style="width: 17%;"><?php echo esc_html__('Product Name', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
                 <th style="width: 7%;"><?php echo esc_html__('Status', 'bulk-price-discount-editor-for-woocommerce'); ?></th>
                 <th style="width: 9%;">

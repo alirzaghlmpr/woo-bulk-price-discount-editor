@@ -32,7 +32,7 @@ class Bulk_Pricer_Admin_Menu
             Bulk_Pricer_Loader::capability(),
             'theme-bulk-pricer',
             array($this, 'render_admin_page'),
-            'dashicons-money-alt',
+            BULK_PRICER_PLUGIN_URL . 'assets/images/menu-icon.png',
             56
         );
     }
